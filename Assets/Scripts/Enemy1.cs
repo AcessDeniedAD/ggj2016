@@ -7,6 +7,9 @@ public class Enemy1 : EnnemisMain {
 	private float timeBeetween2Frames;
 	// Use this for initialization
 	void Start () {
+		//Init closest tree
+		tree = findClosestTree();
+
 		animator =gameObject.GetComponent<Animator> ();
 		audioSource =gameObject.GetComponent<AudioSource> ();
 	}

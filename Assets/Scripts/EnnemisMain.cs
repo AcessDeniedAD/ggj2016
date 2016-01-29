@@ -25,8 +25,6 @@ public class EnnemisMain : MonoBehaviour {
 	// Use this for initialization
 	void Start()
 	{
-		//Init closest tree
-		tree = findClosestTree();
 	}
 	// Update is called once per frame
 	void Update () {
