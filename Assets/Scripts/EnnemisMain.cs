@@ -5,7 +5,8 @@ public class EnnemisMain : MonoBehaviour {
 	public float HP ;
 	public float damage;
 	public float speed;
-	public GameObject tree;
+	protected GameObject tree;
+	public bool hasReachTheTree = false;
 	[HideInInspector]public bool isAlive = true;
 	[HideInInspector]public Animator animator;
 	[HideInInspector]public AudioSource audioSource;
@@ -25,6 +26,7 @@ public class EnnemisMain : MonoBehaviour {
 	// Use this for initialization
 	void Start()
 	{
+
 	}
 	// Update is called once per frame
 	void Update () {
@@ -52,7 +54,7 @@ public class EnnemisMain : MonoBehaviour {
 	}
 
 	//Retrun the closest tree
-	public GameObject findClosestTree() {
+	protected GameObject findClosestTree() {
 		GameObject[] gos;
 		gos = GameObject.FindGameObjectsWithTag("Tree");
 		GameObject closest = null;
@@ -68,5 +70,5 @@ public class EnnemisMain : MonoBehaviour {
 		}
 		return closest;
 	}
-	
+
 }

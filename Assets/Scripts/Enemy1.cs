@@ -22,7 +22,7 @@ public class Enemy1 : EnnemisMain {
 
 	// Update is called once per frame
 	void Update () {
-		moveEnemy ();
+		if (!hasReachTheTree) { moveEnemy (); }
 		timeBeetween2Frames = Time.deltaTime;
 		timer += timeBeetween2Frames;
 		if (timer > 2) 
