@@ -3,6 +3,7 @@ using System.Collections;
 
 public class EnnemisMain : MonoBehaviour {
 	public float HP ;
+	public float dammage;
 	[HideInInspector]public bool isAlive = true;
 	[HideInInspector]public Animator animator;
 	[HideInInspector]public AudioSource audioSource;
@@ -13,6 +14,7 @@ public class EnnemisMain : MonoBehaviour {
 	public EnnemisMain()
 	{
 		HP = 100;
+		dammage = 10;
 		isAlive = true;
 		animator = animator;
 	}
