@@ -8,13 +8,16 @@ public class PlayerMain : MonoBehaviour
 	public int playerNum;
 	public AudioClip deathSound;
 	public float speed=5;
-
+	public GameObject bullet;
 	[HideInInspector]public bool isAlive = true;
 	[HideInInspector]public Animator animator;
 	[HideInInspector]public AudioSource audioSource;
+	private float rateOfFire=0.2f;
+	//[HideInInspector]public 
 
 	private float timeBeetween2Frames = 0;
 	private float timer;
+	private float timerForShoot=0;
 
 	public delegate void CallBackMethode(Transform playerPos);
 	CallBackMethode skill1;
@@ -60,27 +63,21 @@ public class PlayerMain : MonoBehaviour
 			if(skill1 != null && isAlive)
 			skill1(transform);
 		}
-		else
-			if (inputDevice.Action2)
-		{
-
-		}
-		else
-			if (inputDevice.Action3)
-		{
-		
-		}
-		else
-			if (inputDevice.Action4)
-		{
-
-		}
-		else
-		{
-
-		}
 		//----DEPLACEMENT
-		gameObject.transform.position += new Vector3 (inputDevice.LeftStickX * Time.deltaTime*speed, inputDevice.LeftStickY * Time.deltaTime*speed, 0 );
+		gameObject.transform.position += new Vector3 (inputDevice.LeftStickX * Time.deltaTime*speed, 0, inputDevice.LeftStickY * Time.deltaTime*speed );
+		if (Mathf.Abs (inputDevice.LeftStickX) >= 0.19 || Mathf.Abs (inputDevice.LeftStickY) >= 0.19) {
+			transform.rotation = Quaternion.Euler (new Vector3 (0, Mathf.Atan2 (inputDevice.LeftStickX, inputDevice.LeftStickY) * Mathf.Rad2Deg, 0));
+		}
+		if (Mathf.Abs (inputDevice.RightStickX) >= 0.65 || Mathf.Abs (inputDevice.RightStickY) >= 0.65) {
+			//timer += Time.deltaTime;
+
+			transform.rotation = Quaternion.Euler (new Vector3 (0, Mathf.Atan2 (inputDevice.RightStickX, inputDevice.RightStickY) * Mathf.Rad2Deg, 0));
+
+			//___________SHOOTING__________________
+			shootBullet();
+			//______________________________________
+				
+		}
 	}
 	public void takeDamage(float damage)//---------------PRISE DE DEGAT (ou gain si la value en parametre est negative)
 	{
@@ -89,7 +86,6 @@ public class PlayerMain : MonoBehaviour
 		{
 			StartCoroutine(setDestroy());
 		}
-
 		Debug.Log ("player as : "+ HP+" HP");
 	}
 	IEnumerator setDestroy()//------------------- ANIMATION PUIS DESTRUCTION DE L'OBJET
@@ -104,15 +100,31 @@ public class PlayerMain : MonoBehaviour
 	}
 	void OnTriggerEnter(Collider col)
 	{
-		Destroy (col.gameObject);
-		setSkill1 (col.gameObject.GetComponent<ItemMain> ().getSkill); 
+
+		if (col.tag == "IncantationArea") {
+			Debug.Log ("doihfeiughfdiuoghfduykgveyfd,hngin,fdmohtrfminhhniov");
+		}
+		else 
+		{
+			Destroy (col.gameObject);
+			setSkill1 (col.gameObject.GetComponent<ItemMain> ().getSkill); 
+		}
 	}
 	public void setSkill1(CallBackMethode p_callBackExecution)
 	{
 		skill1 = new CallBackMethode (p_callBackExecution);//set le comportement du skill 
 	}
-
-
-
-
+	public void shootBullet()
+	{
+		if(isAlive)
+		{
+			timerForShoot += Time.deltaTime;
+			Debug.Log (rateOfFire);
+			if (timerForShoot >= rateOfFire) 
+			{
+				GameObject go = Instantiate (bullet, transform.position, transform.rotation) as GameObject;
+				timerForShoot = 0;
+			}	
+		}
+	}
 }
