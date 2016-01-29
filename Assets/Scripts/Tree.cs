@@ -48,7 +48,7 @@ public class Tree : MonoBehaviour {
 		}
 
 		if (current_maturity == max_maturity) {
-			up_level_tree()
+			up_level_tree();
 		}
 
 	}
