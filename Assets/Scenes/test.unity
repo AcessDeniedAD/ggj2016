@@ -160,7 +160,7 @@ GameObject:
   - 23: {fileID: 426990734}
   m_Layer: 0
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Tree
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -403,7 +403,7 @@ GameObject:
   - 33: {fileID: 633069041}
   - 136: {fileID: 633069040}
   - 23: {fileID: 633069039}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Cylinder (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -500,7 +500,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: 150
   damage: 0
-  speed: 0
+  speed: 10
   tree: {fileID: 0}
   isAlive: 1
   animator: {fileID: 0}
@@ -874,7 +874,7 @@ GameObject:
   - 135: {fileID: 1756312765}
   m_Layer: 0
   m_Name: IncatationArea
-  m_TagString: Untagged
+  m_TagString: IncantationArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -902,7 +902,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
 --- !u!1 &1845381383
 GameObject:
   m_ObjectHideFlags: 0
@@ -918,7 +918,7 @@ GameObject:
   - 95: {fileID: 1845381389}
   - 82: {fileID: 1845381390}
   - 54: {fileID: 1845381391}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
