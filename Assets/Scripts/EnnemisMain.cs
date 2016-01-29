@@ -39,7 +39,6 @@ public class EnnemisMain : MonoBehaviour {
 		{
 			StartCoroutine(setDestroy());
 		}
-		Debug.Log ("enemy as : "+ HP+" HP");
 	}
 	IEnumerator setDestroy()
 	{
