@@ -4,6 +4,8 @@ using System.Collections;
 public class EnnemisMain : MonoBehaviour {
 	public float HP ;
 	public float damage;
+	public float speed;
+	public GameObject tree;
 	[HideInInspector]public bool isAlive = true;
 	[HideInInspector]public Animator animator;
 	[HideInInspector]public AudioSource audioSource;
@@ -13,8 +15,12 @@ public class EnnemisMain : MonoBehaviour {
 	
 	public EnnemisMain()
 	{
+		//Init closest tree
+		tree = findClosestTree();
+
 		HP = 100;
 		damage = 10;
+		speed = 10;
 		isAlive = true;
 		animator = animator;
 	}
@@ -46,6 +52,24 @@ public class EnnemisMain : MonoBehaviour {
 		yield return new WaitForSeconds (3);
 		Destroy(gameObject);
 		yield return 0;
+	}
+
+	//Retrun the closest tree
+	private GameObject findClosestTree() {
+		GameObject[] gos;
+		gos = GameObject.FindGameObjectsWithTag("Tree");
+		GameObject closest = null;
+		float distance = Mathf.Infinity;
+		Vector3 position = transform.position;
+		foreach (GameObject go in gos) {
+			Vector3 diff = go.transform.position - position;
+			float curDistance = diff.sqrMagnitude;
+			if (curDistance < distance) {
+				closest = go;
+				distance = curDistance;
+			}
+		}
+		return closest;
 	}
 	
 }
