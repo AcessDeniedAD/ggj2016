@@ -15,19 +15,18 @@ public class EnnemisMain : MonoBehaviour {
 	
 	public EnnemisMain()
 	{
-		//Init closest tree
-		tree = findClosestTree();
 
 		HP = 100;
 		damage = 10;
-		speed = 10;
+		speed = 100;
 		isAlive = true;
 		animator = animator;
 	}
 	// Use this for initialization
 	void Start()
 	{
-
+		//Init closest tree
+		tree = findClosestTree();
 	}
 	// Update is called once per frame
 	void Update () {
@@ -55,7 +54,7 @@ public class EnnemisMain : MonoBehaviour {
 	}
 
 	//Retrun the closest tree
-	private GameObject findClosestTree() {
+	public GameObject findClosestTree() {
 		GameObject[] gos;
 		gos = GameObject.FindGameObjectsWithTag("Tree");
 		GameObject closest = null;
