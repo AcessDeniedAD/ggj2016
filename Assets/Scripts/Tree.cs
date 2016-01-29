@@ -33,15 +33,17 @@ public class Tree : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 		if (other.tag == "Enemy") {
-			take_dammage(other.gameObject);
+			EnnemisMain enemy = other.GetComponent<EnnemisMain>();
+			take_dammage(enemy);
+			enemy.hasReachTheTree = true;
+
 		}
 	}
 	#endregion
 
 	#region Public method
-	public void take_dammage(GameObject ennemy){
-				
-		EnnemisMain enemy = ennemy.GetComponent<EnnemisMain>();
+	public void take_dammage(EnnemisMain enemy){
+
 		treelife -= enemy.damage;
 		if (treelife == 0) {
 			// Call loose scene 
