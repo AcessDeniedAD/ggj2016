@@ -10,6 +10,7 @@ public class Tree : MonoBehaviour {
 	public float up_vitesse;
 	public GameObject[] treeObject;
 	public GameObject effect_up;
+	public float total_maturity;
 
 	// Private attributes
 	private float _current_maturity = 0;
@@ -77,11 +78,14 @@ public class Tree : MonoBehaviour {
 	/// </summary>
 	/// <param name="maturity_to_up">Float value to increase maturity tree</param>
 	public void up_maturity(float maturity_to_up){
+		GameObject floor = GameObject.FindGameObjectWithTag("floor");
 		if (_tree_life != 0) {
 			if (max_maturity > _current_maturity && (_current_maturity + maturity_to_up) < max_maturity) {
-				_current_maturity += maturity_to_up;
+				total_maturity += maturity_to_up;
+				_current_maturity += (maturity_to_up * floor.GetComponent<SceneManager>().current_tree.Count);
 			}
 			else if((_current_maturity + maturity_to_up) > max_maturity && _current_maturity < max_maturity){
+				total_maturity = max_maturity;
 				_current_maturity = max_maturity;
 			}
 			else{
@@ -91,7 +95,7 @@ public class Tree : MonoBehaviour {
 			if (_current_maturity == max_maturity) {
 				up_level_tree();
 
-				_current_maturity = 0;	
+				_current_maturity = total_maturity % (max_maturity/floor.GetComponent<SceneManager>().current_tree.Count);	
 			}
 		}
 
