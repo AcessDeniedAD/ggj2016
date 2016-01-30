@@ -81,6 +81,7 @@ MonoBehaviour:
   - {fileID: 194744, guid: 56633baf00d1cac49b7019f2f7b29df7, type: 2}
   - {fileID: 167820, guid: fc3b6d1d5f650d842a2fd57bebbf6c0d, type: 2}
   - {fileID: 146822, guid: b7543fbf8b7b86a4f9806a6a85bca08a, type: 2}
+  effect_up: {fileID: 144774, guid: 1efe9ead9a7f4e3469167f484b38ce34, type: 2}
 --- !u!136 &13671518
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -121,6 +122,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5547e7b1b33b3eb45b1daf2eec43ab7e, type: 2}
+    - target: {fileID: 0}
+      propertyPath: effect_up
+      value: 
+      objectReference: {fileID: 144774, guid: 1efe9ead9a7f4e3469167f484b38ce34, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 131336}

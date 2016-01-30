@@ -9,6 +9,7 @@ public class Tree : MonoBehaviour {
 	public float max_maturity;
 	public float up_vitesse;
 	public GameObject[] treeObject;
+	public GameObject effect_up;
 
 	// Private attributes
 	private float _current_maturity = 0;
@@ -47,7 +48,19 @@ public class Tree : MonoBehaviour {
 			take_dammage(enemy);
 			enemy.hasReachTheTree = true;
 		}
+		if (other.tag == "bullet") {
+			GameObject bulletGO = other.gameObject;
+			StartCoroutine(DestroyBullet(bulletGO));
+		}
 	}
+	IEnumerator DestroyBullet(GameObject b)
+	{
+		//ici jouer les animations de mort avant la destruction
+		Destroy(b);
+		//yield return new WaitForEndOfFrame ();
+		yield return 0;
+	}
+
 	#endregion
 
 	#region Public method
@@ -59,6 +72,7 @@ public class Tree : MonoBehaviour {
 		}
 
 	}
+
 
 	/// <summary>
 	/// Up the maturity tree value
@@ -78,12 +92,13 @@ public class Tree : MonoBehaviour {
 
 			if (_current_maturity == max_maturity) {
 				up_level_tree();
+
 				_current_maturity = 0;	
 			}
 		}
 
 	}
-
+	
 	/// <summary>
 	/// Down the maturity tree value
 	/// </summary>
@@ -117,11 +132,17 @@ public class Tree : MonoBehaviour {
 			tree.treeObject = before_treeObject ;
 			GameObject floor = GameObject.FindGameObjectWithTag("floor");
 			int i;
-			Debug.LogError(floor.GetComponent<SceneManager>().current_tree);
+			Debug.LogWarning("Before for ");
 			for(i=0; i < floor.GetComponent<SceneManager>().current_tree.Count;i++){
 				GameObject curr_tree = floor.GetComponent<SceneManager>().current_tree[i];
 				if (curr_tree.GetComponent<Tree>().Current_maturity == tree.max_maturity){
+					Debug.LogWarning("In if ");
 					floor.GetComponent<SceneManager>().current_tree[i] = go;
+
+					Vector3 spawn_position2 = new Vector3 (go.transform.position.x, go.transform.position.y +1, go.transform.position.z);
+					Quaternion spawn_orientation2 = Quaternion.identity;
+					GameObject goTemp = Instantiate (effect_up, spawn_position2, spawn_orientation2) as GameObject;
+					goTemp.GetComponent<up_effect>()._launch_effect();
 				}
 
 			}
@@ -131,6 +152,9 @@ public class Tree : MonoBehaviour {
 		}
 
 	}
+
+
+
 	#endregion
 
 	public float Current_maturity
