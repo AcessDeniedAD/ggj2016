@@ -2,10 +2,13 @@ using UnityEngine;
 using System.Collections;
 
 public class EnnemisMain : MonoBehaviour {
-	public float HP ;
+	public float HPInit ;
+	protected float HP ;
 	public float damage;
 	public float speed;
-	protected GameObject tree;
+	public GameObject lifeIndicatorLookTarget; 
+	protected Vector3 target;
+	protected GameObject lifeIndicator;
 	public bool hasReachTheTree = false;
 	[HideInInspector]public bool isAlive = true;
 	[HideInInspector]public Animator animator;
@@ -15,9 +18,9 @@ public class EnnemisMain : MonoBehaviour {
 
 	
 	public EnnemisMain()
-	{
-
-		HP = 100;
+	{	
+		HPInit = 100;
+		HP = HPInit;
 		damage = 10;
 		speed = 100;
 		isAlive = true;
@@ -35,6 +38,10 @@ public class EnnemisMain : MonoBehaviour {
 	public void takeDamage(float damage)
 	{
 		HP -= damage;
+		
+		//Change size of life indicator
+		lifeIndicator.transform.localScale -= new Vector3((HPInit-HP) / HPInit, 0, 0);
+
 		if (HP <= 0 && isAlive) 
 		{
 			StartCoroutine(setDestroy());
@@ -54,8 +61,12 @@ public class EnnemisMain : MonoBehaviour {
 
 	//Retrun the closest tree
 	protected GameObject findClosestTree() {
+		return findClosestGameObject("Tree");
+	}
+
+	protected GameObject findClosestGameObject(string tag) {
 		GameObject[] gos;
-		gos = GameObject.FindGameObjectsWithTag("Tree");
+		gos = GameObject.FindGameObjectsWithTag(tag);
 		GameObject closest = null;
 		float distance = Mathf.Infinity;
 		Vector3 position = transform.position;
