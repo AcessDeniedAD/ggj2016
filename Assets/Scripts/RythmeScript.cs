@@ -19,11 +19,20 @@ public class RythmeScript : MonoBehaviour {
 	}
 	public void DestroyLetters()
 	{
-		GameObject[] gos = GameObject.FindGameObjectsWithTag("Letters");
-		for (int i = 0; i<=gos.Length; i++) 
+		if (a.tag == "Latters") {
+			GameObject[] gos = GameObject.FindGameObjectsWithTag ("Latters");
+			for (int i = 0; i<gos.Length; i++) {
+				Destroy (gos [i]);
+			}
+		} 
+		else 
 		{
-			Destroy(gos[i]);
+			GameObject[] gos = GameObject.FindGameObjectsWithTag ("Letters");
+			for (int i = 0; i<gos.Length; i++) {
+				Destroy (gos [i]);
+			}
 		}
+
 		
 	}
 	public void SetInputPos()
