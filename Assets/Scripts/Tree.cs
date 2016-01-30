@@ -32,6 +32,7 @@ public class Tree : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// TODO to delete
+
 		timer += Time.deltaTime;
 		if (timer > 0.5) {
 			timer  = 0;
@@ -78,24 +79,24 @@ public class Tree : MonoBehaviour {
 	/// </summary>
 	/// <param name="maturity_to_up">Float value to increase maturity tree</param>
 	public void up_maturity(float maturity_to_up){
-		GameObject floor = GameObject.FindGameObjectWithTag("floor");
 		if (_tree_life != 0) {
 			if (max_maturity > _current_maturity && (_current_maturity + maturity_to_up) < max_maturity) {
 				total_maturity += maturity_to_up;
-				_current_maturity += (maturity_to_up * floor.GetComponent<SceneManager>().current_tree.Count);
+				_current_maturity += (maturity_to_up * treeObject.Length);
 			}
 			else if((_current_maturity + maturity_to_up) > max_maturity && _current_maturity < max_maturity){
-				total_maturity = max_maturity;
+				total_maturity += maturity_to_up;
 				_current_maturity = max_maturity;
 			}
 			else{
 				Debug.Log("You're fucking tree are full maturity");
 			}
+			if (total_maturity > max_maturity)
+				total_maturity = max_maturity;
 
 			if (_current_maturity == max_maturity) {
 				up_level_tree();
-
-				_current_maturity = total_maturity % (max_maturity/floor.GetComponent<SceneManager>().current_tree.Count);	
+				_current_maturity = total_maturity % (max_maturity / treeObject.Length);
 			}
 		}
 
@@ -123,6 +124,7 @@ public class Tree : MonoBehaviour {
 		if (treeObject.Length != _tree_level) {
 			int before_level = _tree_level;
 			float before_life = _tree_life;
+			float before_total_maturity = total_maturity;
 			GameObject[] before_treeObject = treeObject;
 			Vector3 spawn_position = new Vector3 (this.transform.position.x, this.transform.position.y, this.transform.position.z);
 			Destroy (this.gameObject);
@@ -131,14 +133,13 @@ public class Tree : MonoBehaviour {
 			Tree tree = go.GetComponent<Tree>();
 			tree.Tree_level = before_level +1 ;
 			tree.Tree_life = before_life ;
+			tree.total_maturity = before_total_maturity ;
 			tree.treeObject = before_treeObject ;
 			GameObject floor = GameObject.FindGameObjectWithTag("floor");
 			int i;
-			Debug.LogWarning("Before for ");
 			for(i=0; i < floor.GetComponent<SceneManager>().current_tree.Count;i++){
 				GameObject curr_tree = floor.GetComponent<SceneManager>().current_tree[i];
 				if (curr_tree.GetComponent<Tree>().Current_maturity == tree.max_maturity){
-					Debug.LogWarning("In if ");
 					floor.GetComponent<SceneManager>().current_tree[i] = go;
 
 					Vector3 spawn_position2 = new Vector3 (go.transform.position.x, go.transform.position.y +1, go.transform.position.z);
