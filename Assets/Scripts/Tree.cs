@@ -113,7 +113,7 @@ public class Tree : MonoBehaviour {
 			floor.GetComponent<SceneManager>().current_tree = go;
 		} else {
 			//TODO end the game
-			Debug.Log("Your die");
+		 	SceneManager.end_game = true;
 		}
 
 	}
