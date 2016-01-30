@@ -1304,6 +1304,7 @@ MonoBehaviour:
   bullet: {fileID: 140426, guid: 6b6754a8efb8bfd40aef7247e4175674, type: 2}
   JaugeInputPlayer1: {fileID: 1502210509}
   iconSign: {fileID: 1788881308}
+  rythmeScript: {fileID: 1502210514}
   LettersId: none
   isAlive: 1
   animator: {fileID: 0}

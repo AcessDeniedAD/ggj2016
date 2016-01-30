@@ -12,12 +12,14 @@ public class PlayerMain : MonoBehaviour
 	public GameObject bullet;
 	public GameObject JaugeInputPlayer1;
 	public GameObject iconSign;
+	public RythmeScript rythmeScript;
 	[HideInInspector]public string LettersId ="none";
 	[HideInInspector]public bool isAlive = true;
 	[HideInInspector]public Animator animator;
 	[HideInInspector]public AudioSource audioSource;
 	[HideInInspector] public GameObject LettersGameObj;
-	private float rateOfFire=0.2f;
+	[HideInInspector]public bool defeatIncant;
+	private float rateOfFire=1f;
 	//[HideInInspector]public 
 	private float timeBeetween2Frames = 0;
 	private float timer;
@@ -43,6 +45,16 @@ public class PlayerMain : MonoBehaviour
 	}
 	void Update()
 	{
+		//Si le joueur rate un incantation
+		if (defeatIncant) 
+		{
+			defeatIncant=false;
+			Debug.Break();
+			JaugeInputPlayer1.GetComponent<Animator>().SetBool("canDie",true);
+			isIncant = false;
+			LettersId="none";
+			rythmeScript.DestroyLetters();
+		}
 		var inputDevice = (InputManager.Devices.Count > playerNum) ? InputManager.Devices[playerNum] : null;
 		if (inputDevice == null)
 		{
@@ -72,14 +84,17 @@ public class PlayerMain : MonoBehaviour
 		}*/
 		if (canIncant && inputDevice.Action3.WasPressed ) 
 		{
+
 			buttonXSign.SetActive(false);
 			JaugeInputPlayer1.SetActive(true);
 			JaugeInputPlayer1.GetComponent<Animator>().SetBool("canDie",false);
+			rythmeScript.SetInputPos();
 			isIncant = true;
 			canIncant=false;
 		}
 		if ( isIncant && inputDevice.Action1.WasPressed && LettersId=="a" ) 
 		{
+
 			StartCoroutine(iconOK());
 			if(LettersGameObj!=null)
 			LettersGameObj.GetComponent<Letters>().goDestroy();
@@ -88,10 +103,12 @@ public class PlayerMain : MonoBehaviour
 				JaugeInputPlayer1.GetComponent<Animator>().SetBool("canDie",true);
 				isIncant = false;
 				LettersId="none";
+				rythmeScript.DestroyLetters();
 			}
 		}
 		if (isIncant && inputDevice.Action2.WasPressed && LettersId=="b") 
 		{
+
 			StartCoroutine(iconOK());
 			if(LettersGameObj!=null)
 			LettersGameObj.GetComponent<Letters>().goDestroy();
@@ -100,10 +117,12 @@ public class PlayerMain : MonoBehaviour
 				JaugeInputPlayer1.GetComponent<Animator>().SetBool("canDie",true);
 				isIncant = false;
 				LettersId="none";
+				rythmeScript.DestroyLetters();
 			}
 		}
 		if (isIncant && inputDevice.Action3.WasPressed && LettersId=="x") 
 		{
+
 			StartCoroutine(iconOK());
 			if(LettersGameObj!=null)
 			LettersGameObj.GetComponent<Letters>().goDestroy();
@@ -112,10 +131,12 @@ public class PlayerMain : MonoBehaviour
 				JaugeInputPlayer1.GetComponent<Animator>().SetBool("canDie",true);
 				isIncant = false;
 				LettersId="none";
+				rythmeScript.DestroyLetters();
 			}
 		}
 		if (isIncant && inputDevice.Action4.WasPressed && LettersId=="y") 
 		{
+
 			StartCoroutine(iconOK());
 			if(LettersGameObj!=null)
 			LettersGameObj.GetComponent<Letters>().goDestroy();
@@ -124,6 +145,7 @@ public class PlayerMain : MonoBehaviour
 				JaugeInputPlayer1.GetComponent<Animator>().SetBool("canDie",true);
 				isIncant = false;
 				LettersId="none";
+				rythmeScript.DestroyLetters();
 			}
 		}
 		//----DEPLACEMENT
@@ -198,6 +220,7 @@ public class PlayerMain : MonoBehaviour
 		{
 			timerForShoot += Time.deltaTime;
 			Debug.Log (rateOfFire);
+			Debug.Break();
 			if (timerForShoot >= rateOfFire) 
 			{
 				Bullet b = Instantiate (bullet, transform.position, transform.rotation) as Bullet;
@@ -209,16 +232,20 @@ public class PlayerMain : MonoBehaviour
 	}
 	IEnumerator iconOK()
 	{
-		float t= Time.deltaTime;
-		iconSign.SetActive (true);
-		Vector3 saveScale = iconSign.transform.localScale;
-		while (iconSign.transform.localScale.x<saveScale.x *1.5) 
+		if (LettersId != "none") 
 		{
-			iconSign.transform.localScale+=new Vector3(t*2.5f,t*2.5f,t*2.5f);
-			yield return 0 ;
+			float t= Time.deltaTime;
+			iconSign.SetActive (true);
+			Vector3 saveScale = iconSign.transform.localScale;
+			while (iconSign.transform.localScale.x<saveScale.x *1.5) 
+			{
+				iconSign.transform.localScale+=new Vector3(t*2.5f,t*2.5f,t*2.5f);
+				yield return 0 ;
+			}
+			yield return 0;
+			iconSign.SetActive (false);
+			iconSign.transform.localScale = saveScale;
 		}
-		yield return 0;
-		iconSign.SetActive (false);
-		iconSign.transform.localScale = saveScale;
+
 	}
 }
