@@ -24,7 +24,7 @@ public class PlayerMain : MonoBehaviour
 	private float timeBeetween2Frames = 0;
 	private float timer;
 	private float timerForShoot=0.5f;
-	private GameObject InOnThisTree;
+	[HideInInspector]public GameObject InOnThisTree;
 	[HideInInspector]public bool canIncant=false;
 	private bool isIncant = false;
 
@@ -95,6 +95,7 @@ public class PlayerMain : MonoBehaviour
 		}
 		if ( isIncant && inputDevice.Action1.WasPressed && LettersId=="a" ) 
 		{
+			if(InOnThisTree!=null)
 			InOnThisTree.GetComponent<Tree>().up_maturity(10);
 			StartCoroutine(iconOK());
 			if(LettersGameObj!=null)
@@ -113,6 +114,7 @@ public class PlayerMain : MonoBehaviour
 		}
 		if (isIncant && inputDevice.Action2.WasPressed && LettersId=="b") 
 		{
+			if(InOnThisTree!=null)
 			InOnThisTree.GetComponent<Tree>().up_maturity(10);
 			StartCoroutine(iconOK());
 			if(LettersGameObj!=null)
@@ -129,6 +131,7 @@ public class PlayerMain : MonoBehaviour
 		}
 		if (isIncant && inputDevice.Action3.WasPressed && LettersId=="x") 
 		{
+			if(InOnThisTree!=null)
 			InOnThisTree.GetComponent<Tree>().up_maturity(10);
 			StartCoroutine(iconOK());
 			if(LettersGameObj!=null)
@@ -145,6 +148,7 @@ public class PlayerMain : MonoBehaviour
 		}
 		if (isIncant && inputDevice.Action4.WasPressed && LettersId=="y") 
 		{
+			if(InOnThisTree!=null)
 			InOnThisTree.GetComponent<Tree>().up_maturity(10);
 			StartCoroutine(iconOK());
 			if(LettersGameObj!=null)

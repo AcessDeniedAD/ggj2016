@@ -4,7 +4,8 @@ using System.Collections;
 public class CameraRay : MonoBehaviour {
 
 	public GameObject tree;
-	private Renderer rende;
+	public Renderer rende;
+
 	// Use this for initialization
 	void Start () {
 		rende = tree.GetComponent<Renderer> ();
@@ -26,7 +27,6 @@ public class CameraRay : MonoBehaviour {
 	}
 	public void reSetTree()
 	{
-		tree = GameObject.FindGameObjectWithTag ("tree");
 		rende= tree.GetComponent<Renderer> ();
 	}
 }

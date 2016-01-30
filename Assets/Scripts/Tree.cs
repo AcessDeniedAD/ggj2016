@@ -11,8 +11,9 @@ public class Tree : MonoBehaviour {
 	public GameObject[] treeObject;
 	public GameObject effect_up;
 	public float total_maturity = 0;
-	public GameObject cameraRay;
-
+	private CameraRay cameraRay;
+	private GameObject player1;
+	private GameObject player2;
 	// Private attributes
 	private float _current_maturity = 0;
 	private int _tree_level = 1;
@@ -24,6 +25,12 @@ public class Tree : MonoBehaviour {
 	#region Unity method 
 	// Use this for initialization
 	void Start () {
+		GameObject.Find ("Player").GetComponent<PlayerMain> ().InOnThisTree = gameObject;
+		GameObject.Find ("Player2").GetComponent<PlayerMain> ().InOnThisTree = gameObject;
+		GameObject.Find ("Jauge1Mat").GetComponent<Turn> ().tree = gameObject;
+		cameraRay = GameObject.Find ("CameraRay").GetComponent<CameraRay> ();
+		cameraRay.tree = gameObject;
+		cameraRay.reSetTree ();
 		GameObject floor = GameObject.FindGameObjectWithTag("floor");
 		floor.GetComponent<SceneManager>().current_tree.Add(this.gameObject);
 		_tree_life = treelife;
@@ -130,7 +137,6 @@ public class Tree : MonoBehaviour {
 				GameObject curr_tree = floor.GetComponent<SceneManager>().current_tree[i];
 				if (curr_tree.GetComponent<Tree>().Current_maturity == tree.max_maturity){
 					floor.GetComponent<SceneManager>().current_tree[i] = go;
-
 					Vector3 spawn_position2 = new Vector3 (go.transform.position.x, go.transform.position.y +1, go.transform.position.z);
 					Quaternion spawn_orientation2 = Quaternion.identity;
 					GameObject goTemp = Instantiate (effect_up, spawn_position2, spawn_orientation2) as GameObject;
