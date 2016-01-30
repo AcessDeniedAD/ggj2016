@@ -137,7 +137,18 @@ public class Tree : MonoBehaviour {
 			}
 		} else {
 			//TODO end the game
-		 	SceneManager.end_game = true;
+			bool is_end_game = true;
+			foreach (GameObject tree in treeObject)
+			{
+				if(tree.GetComponent<Tree>().total_maturity != 100){
+					is_end_game = false;
+					break;
+				}
+			}
+			if (is_end_game == true){
+				SceneManager.end_game = true;
+				Debug.Log ("End game");
+			}
 		}
 
 	}
