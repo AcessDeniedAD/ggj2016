@@ -10,14 +10,21 @@ public class PlayerMain : MonoBehaviour
 	public float speed=5;
 	public GameObject buttonXSign;
 	public GameObject bullet;
+	public GameObject JaugeInputPlayer1;
+	public GameObject iconSign;
+	[HideInInspector]public string LettersId ="none";
 	[HideInInspector]public bool isAlive = true;
 	[HideInInspector]public Animator animator;
 	[HideInInspector]public AudioSource audioSource;
+	[HideInInspector] public GameObject LettersGameObj;
 	private float rateOfFire=0.2f;
 	//[HideInInspector]public 
 	private float timeBeetween2Frames = 0;
 	private float timer;
 	private float timerForShoot=0;
+	private bool canIncant=false;
+	private bool isIncant = false;
+
 
 	public delegate void CallBackMethode(Transform playerPos);
 	CallBackMethode skill1;
@@ -58,26 +65,86 @@ public class PlayerMain : MonoBehaviour
 	void UpdateCubeWithInputDevice( InputDevice inputDevice )
 	{
 		// Set object material color based on which action is pressed.
-		if (inputDevice.Action1.WasPressed)
+		/*if (inputDevice.Action1.WasPressed)
 		{
 			if(skill1 != null && isAlive)
 			skill1(transform);
+		}*/
+		if (canIncant && inputDevice.Action3.WasPressed ) 
+		{
+			buttonXSign.SetActive(false);
+			JaugeInputPlayer1.SetActive(true);
+			JaugeInputPlayer1.GetComponent<Animator>().SetBool("canDie",false);
+			isIncant = true;
+			canIncant=false;
+		}
+		if ( isIncant && inputDevice.Action1.WasPressed && LettersId=="a" ) 
+		{
+			StartCoroutine(iconOK());
+			if(LettersGameObj!=null)
+			LettersGameObj.GetComponent<Letters>().goDestroy();
+			if(LettersGameObj.GetComponent<Letters>().lastLetters)
+			{
+				JaugeInputPlayer1.GetComponent<Animator>().SetBool("canDie",true);
+				isIncant = false;
+				LettersId="none";
+			}
+		}
+		if (isIncant && inputDevice.Action2.WasPressed && LettersId=="b") 
+		{
+			StartCoroutine(iconOK());
+			if(LettersGameObj!=null)
+			LettersGameObj.GetComponent<Letters>().goDestroy();
+			if(LettersGameObj.GetComponent<Letters>().lastLetters)
+			{
+				JaugeInputPlayer1.GetComponent<Animator>().SetBool("canDie",true);
+				isIncant = false;
+				LettersId="none";
+			}
+		}
+		if (isIncant && inputDevice.Action3.WasPressed && LettersId=="x") 
+		{
+			StartCoroutine(iconOK());
+			if(LettersGameObj!=null)
+			LettersGameObj.GetComponent<Letters>().goDestroy();
+			if(LettersGameObj.GetComponent<Letters>().lastLetters)
+			{
+				JaugeInputPlayer1.GetComponent<Animator>().SetBool("canDie",true);
+				isIncant = false;
+				LettersId="none";
+			}
+		}
+		if (isIncant && inputDevice.Action4.WasPressed && LettersId=="y") 
+		{
+			StartCoroutine(iconOK());
+			if(LettersGameObj!=null)
+			LettersGameObj.GetComponent<Letters>().goDestroy();
+			if(LettersGameObj.GetComponent<Letters>().lastLetters)
+			{
+				JaugeInputPlayer1.GetComponent<Animator>().SetBool("canDie",true);
+				isIncant = false;
+				LettersId="none";
+			}
 		}
 		//----DEPLACEMENT
-		gameObject.transform.position += new Vector3 (inputDevice.LeftStickX * Time.deltaTime*speed, 0, inputDevice.LeftStickY * Time.deltaTime*speed );
-		if (Mathf.Abs (inputDevice.LeftStickX) >= 0.19 || Mathf.Abs (inputDevice.LeftStickY) >= 0.19) {
-			transform.rotation = Quaternion.Euler (new Vector3 (0, Mathf.Atan2 (inputDevice.LeftStickX, inputDevice.LeftStickY) * Mathf.Rad2Deg, 0));
-		}
-		if (Mathf.Abs (inputDevice.RightStickX) >= 0.65 || Mathf.Abs (inputDevice.RightStickY) >= 0.65) {
-			//timer += Time.deltaTime;
-
-			transform.rotation = Quaternion.Euler (new Vector3 (0, Mathf.Atan2 (inputDevice.RightStickX, inputDevice.RightStickY) * Mathf.Rad2Deg, 0));
-
-			//___________SHOOTING__________________
-			shootBullet();
-			//______________________________________
+		if (!isIncant) 
+		{
+			gameObject.transform.position += new Vector3 (inputDevice.LeftStickX * Time.deltaTime*speed, 0, inputDevice.LeftStickY * Time.deltaTime*speed );
+			if (Mathf.Abs (inputDevice.LeftStickX) >= 0.19 || Mathf.Abs (inputDevice.LeftStickY) >= 0.19) {
+				transform.rotation = Quaternion.Euler (new Vector3 (0, Mathf.Atan2 (inputDevice.LeftStickX, inputDevice.LeftStickY) * Mathf.Rad2Deg, 0));
+			}
+			if (Mathf.Abs (inputDevice.RightStickX) >= 0.65 || Mathf.Abs (inputDevice.RightStickY) >= 0.65) {
+				//timer += Time.deltaTime;
 				
+				transform.rotation = Quaternion.Euler (new Vector3 (0, Mathf.Atan2 (inputDevice.RightStickX, inputDevice.RightStickY) * Mathf.Rad2Deg, 0));
+				
+				//___________SHOOTING__________________
+				shootBullet();
+				//______________________________________
+				
+			}
 		}
+
 	}
 	public void takeDamage(float damage)//---------------PRISE DE DEGAT (ou gain si la value en parametre est negative)
 	{
@@ -104,17 +171,19 @@ public class PlayerMain : MonoBehaviour
 
 		if (col.tag == "IncantationArea") {
 			buttonXSign.SetActive(true);
+			canIncant = true;
 		}
-		else 
+		else if(col.tag=="Enemy")
 		{
 			Destroy (col.gameObject);
-			setSkill1 (col.gameObject.GetComponent<ItemMain> ().getSkill); 
+			//setSkill1 (col.gameObject.GetComponent<ItemMain> ().getSkill); 
 		}
 	}
 	void OnTriggerExit(Collider col)
 	{
 		if (col.tag == "IncantationArea") {
 			buttonXSign.SetActive(false);
+			canIncant = false;
 		}
 	}
 	//_____________________________________________________________________
@@ -135,5 +204,19 @@ public class PlayerMain : MonoBehaviour
 				timerForShoot = 0;
 			}	
 		}
+	}
+	IEnumerator iconOK()
+	{
+		float t= Time.deltaTime;
+		iconSign.SetActive (true);
+		Vector3 saveScale = iconSign.transform.localScale;
+		while (iconSign.transform.localScale.x<saveScale.x *1.5) 
+		{
+			iconSign.transform.localScale+=new Vector3(t*2.5f,t*2.5f,t*2.5f);
+			yield return 0 ;
+		}
+		yield return 0;
+		iconSign.SetActive (false);
+		iconSign.transform.localScale = saveScale;
 	}
 }
