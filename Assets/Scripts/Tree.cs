@@ -16,32 +16,19 @@ public class Tree : MonoBehaviour {
 	private float _current_maturity = 0;
 	private int _tree_level = 1;
 	private float _tree_life;
-	private float timer = 0 ;// TODO delete
+
 	#endregion
 
 	#region Unity method 
 	// Use this for initialization
 	void Start () {
 		GameObject floor = GameObject.FindGameObjectWithTag("floor");
-		Debug.LogWarning(this.gameObject);
-		Debug.LogWarning(floor.GetComponent<SceneManager>().current_tree);
 		floor.GetComponent<SceneManager>().current_tree.Add(this.gameObject);
 		_tree_life = treelife;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		// TODO to delete
-
-		timer += Time.deltaTime;
-		if (timer > 0.5) {
-			timer  = 0;
-			GameObject floor = GameObject.FindGameObjectWithTag("floor");
-			if(this.gameObject == floor.GetComponent<SceneManager>().current_tree[0])
-				up_maturity(3.5f);
-			else
-				up_maturity(5.5f);
-		}
 	}
 
 	void OnTriggerEnter(Collider other) {
@@ -93,7 +80,6 @@ public class Tree : MonoBehaviour {
 			}
 			if (total_maturity > max_maturity)
 				total_maturity = max_maturity;
-
 			if (_current_maturity == max_maturity) {
 				up_level_tree();
 				_current_maturity = total_maturity % (max_maturity / treeObject.Length);
