@@ -2,10 +2,13 @@ using UnityEngine;
 using System.Collections;
 
 public class EnnemisMain : MonoBehaviour {
-	public float HP ;
+	public float HPInit ;
+	protected float HP ;
 	public float damage;
 	public float speed;
-	protected GameObject tree;
+	public GameObject lifeIndicatorLookTarget; 
+	protected Vector3 target;
+	protected GameObject lifeIndicator;
 	public bool hasReachTheTree = false;
 	[HideInInspector]public bool isAlive = true;
 	[HideInInspector]public Animator animator;
@@ -15,9 +18,9 @@ public class EnnemisMain : MonoBehaviour {
 
 	
 	public EnnemisMain()
-	{
-
-		HP = 100;
+	{	
+		HPInit = 100;
+		HP = HPInit;
 		damage = 10;
 		speed = 100;
 		isAlive = true;
@@ -35,11 +38,36 @@ public class EnnemisMain : MonoBehaviour {
 	public void takeDamage(float damage)
 	{
 		HP -= damage;
+		if (HP < 0) { HP = 0; }
+		
+		//Change size of life indicator
+		if (lifeIndicator != null) {
+			Debug.Log(HP / HPInit);
+			StartCoroutine (reduceLifeIndicator (new Vector3 (HP / HPInit, 0, 0)));
+		}
+
 		if (HP <= 0 && isAlive) 
 		{
 			StartCoroutine(setDestroy());
 		}
 	}
+	
+	IEnumerator reduceLifeIndicator(Vector3 target)
+	{
+		float deltaTimeToEnd = 0.3f;
+		Debug.Log ("localscale=" + lifeIndicator.transform.localScale.x);
+		Debug.Log ("target=" + target.x);
+		while (lifeIndicator.transform.localScale.x > target.x) {
+			float scaleXToRemove = Time.deltaTime * target.x / deltaTimeToEnd;
+			if (scaleXToRemove == 0) { scaleXToRemove = 0.01f; }
+			if (lifeIndicator.transform.localScale.x - scaleXToRemove < 0) { scaleXToRemove = lifeIndicator.transform.localScale.x; }
+			lifeIndicator.transform.localScale -= new Vector3(scaleXToRemove, 0, 0);
+			yield return new WaitForEndOfFrame ();
+		}
+
+		yield return 0;
+	}
+
 	IEnumerator setDestroy()
 	{
 		isAlive = false;
@@ -54,8 +82,12 @@ public class EnnemisMain : MonoBehaviour {
 
 	//Retrun the closest tree
 	protected GameObject findClosestTree() {
+		return findClosestGameObject("Tree");
+	}
+
+	protected GameObject findClosestGameObject(string tag) {
 		GameObject[] gos;
-		gos = GameObject.FindGameObjectsWithTag("Tree");
+		gos = GameObject.FindGameObjectsWithTag(tag);
 		GameObject closest = null;
 		float distance = Mathf.Infinity;
 		Vector3 position = transform.position;
