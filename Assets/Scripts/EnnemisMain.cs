@@ -42,7 +42,6 @@ public class EnnemisMain : MonoBehaviour {
 		
 		//Change size of life indicator
 		if (lifeIndicator != null) {
-			Debug.Log(HP / HPInit);
 			StartCoroutine (reduceLifeIndicator (new Vector3 (HP / HPInit, 0, 0)));
 		}
 
@@ -55,8 +54,6 @@ public class EnnemisMain : MonoBehaviour {
 	IEnumerator reduceLifeIndicator(Vector3 target)
 	{
 		float deltaTimeToEnd = 0.3f;
-		Debug.Log ("localscale=" + lifeIndicator.transform.localScale.x);
-		Debug.Log ("target=" + target.x);
 		while (lifeIndicator.transform.localScale.x > target.x) {
 			float scaleXToRemove = Time.deltaTime * target.x / deltaTimeToEnd;
 			if (scaleXToRemove == 0) { scaleXToRemove = 0.01f; }
@@ -104,18 +101,17 @@ public class EnnemisMain : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other){
 		if (other.tag == "bullet") {
-			Bullet bullet = other.GetComponent<Bullet>();
-			takeDamage(bullet.damage);
-			StartCoroutine(DestroyBullet(bullet));
+			GameObject bulletGO = other.gameObject;
+			takeDamage(bulletGO.GetComponent<Bullet>().damage);
+			StartCoroutine(DestroyBullet(bulletGO));
 		}
 	}
 
-	IEnumerator DestroyBullet(Bullet b)
+	IEnumerator DestroyBullet(GameObject b)
 	{
-		//ici jouer les animations de mort avant la destruction 
-		animator.SetBool ("canDie", true);
-		yield return new WaitForEndOfFrame ();
+		//ici jouer les animations de mort avant la destruction
 		Destroy(b);
+		//yield return new WaitForEndOfFrame ();
 		yield return 0;
 	}
 
