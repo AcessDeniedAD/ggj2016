@@ -192,6 +192,14 @@ public class PlayerMain : MonoBehaviour
 	{
 		skill1 = new CallBackMethode (p_callBackExecution);//set le comportement du skill 
 	}
+	public static Bullet CreateBullet()
+	{
+		GameObject newObject = Instantiate(Resources.Load("Prefab/Bullet")) as GameObject;
+		Bullet b = newObject.GetComponent<Bullet>();
+		b.playerId = 1;
+		b.damage = 100;
+		return b;
+	}
 	public void shootBullet()
 	{
 		if(isAlive)
