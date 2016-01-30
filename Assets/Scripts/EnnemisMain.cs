@@ -99,10 +99,27 @@ public class EnnemisMain : MonoBehaviour {
 		return closest;
 	}
 
+	//return the gameobject of the player number in parameter
+	protected PlayerMain findPlayerNumber(float playerNum) {
+		GameObject[] gos;
+		gos = GameObject.FindGameObjectsWithTag("Player");
+		PlayerMain result = null;
+		foreach (GameObject go in gos) {
+			if (go.GetComponent<PlayerMain>().playerNum == playerNum) {
+				result = go.GetComponent<PlayerMain>();
+			}
+		}
+		return result;
+	}
+
 	void OnTriggerEnter(Collider other){
 		if (other.tag == "bullet") {
 			GameObject bulletGO = other.gameObject;
 			takeDamage(bulletGO.GetComponent<Bullet>().damage);
+			PlayerMain pm = findPlayerNumber(bulletGO.GetComponent<Bullet>().playerNum);
+			if (pm != null){
+				//pm.score += 1;
+			}
 			StartCoroutine(DestroyBullet(bulletGO));
 		}
 	}
