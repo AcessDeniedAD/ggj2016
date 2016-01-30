@@ -2,16 +2,17 @@
 using System.Collections;
 
 public class Tree : MonoBehaviour {
-
+	public static bool test;
 	#region Attributes creation 
 	// Public attributes
 	public float treelife;
 	public float max_maturity;
 	public float up_vitesse;
+	public GameObject[] treeObject;
 
 	// Private attributes
 	private float _current_maturity = 0;
-	private int _tree_level;
+	private int _tree_level = 1;
 	private float _tree_life;
 	private float timer = 0 ;// TODO delete
 	#endregion
@@ -19,6 +20,8 @@ public class Tree : MonoBehaviour {
 	#region Unity method 
 	// Use this for initialization
 	void Start () {
+		GameObject floor = GameObject.FindGameObjectWithTag("floor");
+		floor.GetComponent<SceneManager>().current_tree = this.gameObject;
 		_tree_life = treelife;
 	}
 	
@@ -37,18 +40,16 @@ public class Tree : MonoBehaviour {
 			EnnemisMain enemy = other.GetComponent<EnnemisMain>();
 			take_dammage(enemy);
 			enemy.hasReachTheTree = true;
-
 		}
 	}
 	#endregion
 
 	#region Public method
 	public void take_dammage(EnnemisMain enemy){
-
 		_tree_life -= enemy.damage;
 		if (_tree_life == 0) {
 			// TODO Call loose scene 
-			Debug.Log("Your tree is dead");
+
 		}
 
 	}
@@ -71,6 +72,7 @@ public class Tree : MonoBehaviour {
 
 			if (_current_maturity == max_maturity) {
 				up_level_tree();
+				_current_maturity = 0;	
 			}
 		}
 
@@ -95,15 +97,42 @@ public class Tree : MonoBehaviour {
 
 	#region Private method
 	private void up_level_tree(){
-		// TODO
+		if (treeObject.Length != _tree_level) {
+			int before_level = _tree_level;
+			float before_life = _tree_life;
+			GameObject[] before_treeObject = treeObject;
+			Vector3 spawn_position = new Vector3 (this.transform.position.x, this.transform.position.y, this.transform.position.z);
+			Destroy (this.gameObject);
+			Quaternion spawn_orientation = Quaternion.identity;
+			GameObject go = Instantiate (treeObject [before_level], spawn_position, spawn_orientation) as GameObject;
+			Tree tree = go.GetComponent<Tree>();
+			tree.Tree_level = before_level +1 ;
+			tree.Tree_life = before_life ;
+			tree.treeObject = before_treeObject ;
+			GameObject floor = GameObject.FindGameObjectWithTag("floor");
+			floor.GetComponent<SceneManager>().current_tree = go;
+		} else {
+			//TODO end the game
+			Debug.Log("Your die");
+		}
 
-		// Method to up level of tree
 	}
 	#endregion
 
 	public float Current_maturity
 	{
-		get { return _current_maturity; }
-		set { _current_maturity = value; }
+		get { return _current_maturity ; }
+	}
+
+	public int Tree_level
+	{
+		get { return _tree_level ; }
+		set { _tree_level = value; }
+	}
+
+	public float Tree_life
+	{
+		get { return _tree_life ; }
+		set { _tree_life = value; }
 	}
 }
