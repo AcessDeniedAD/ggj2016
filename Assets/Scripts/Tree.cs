@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 public class Tree : MonoBehaviour {
 	public static bool test;
 	#region Attributes creation 
@@ -21,7 +21,9 @@ public class Tree : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		GameObject floor = GameObject.FindGameObjectWithTag("floor");
-		floor.GetComponent<SceneManager>().current_tree = this.gameObject;
+		Debug.LogWarning(this.gameObject);
+		Debug.LogWarning(floor.GetComponent<SceneManager>().current_tree);
+		floor.GetComponent<SceneManager>().current_tree.Add(this.gameObject);
 		_tree_life = treelife;
 	}
 	
@@ -31,7 +33,11 @@ public class Tree : MonoBehaviour {
 		timer += Time.deltaTime;
 		if (timer > 0.5) {
 			timer  = 0;
-			up_maturity(3.5f);
+			GameObject floor = GameObject.FindGameObjectWithTag("floor");
+			if(this.gameObject == floor.GetComponent<SceneManager>().current_tree[0])
+				up_maturity(3.5f);
+			else
+				up_maturity(5.5f);
 		}
 	}
 
@@ -110,7 +116,15 @@ public class Tree : MonoBehaviour {
 			tree.Tree_life = before_life ;
 			tree.treeObject = before_treeObject ;
 			GameObject floor = GameObject.FindGameObjectWithTag("floor");
-			floor.GetComponent<SceneManager>().current_tree = go;
+			int i;
+			Debug.LogError(floor.GetComponent<SceneManager>().current_tree);
+			for(i=0; i < floor.GetComponent<SceneManager>().current_tree.Count;i++){
+				GameObject curr_tree = floor.GetComponent<SceneManager>().current_tree[i];
+				if (curr_tree.GetComponent<Tree>().Current_maturity == tree.max_maturity){
+					floor.GetComponent<SceneManager>().current_tree[i] = go;
+				}
+
+			}
 		} else {
 			//TODO end the game
 		 	SceneManager.end_game = true;
