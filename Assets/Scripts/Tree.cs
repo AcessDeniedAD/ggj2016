@@ -20,6 +20,8 @@ public class Tree : MonoBehaviour {
 	#region Unity method 
 	// Use this for initialization
 	void Start () {
+		GameObject floor = GameObject.FindGameObjectWithTag("floor");
+		floor.GetComponent<SceneManager>().current_tree = this.gameObject;
 		_tree_life = treelife;
 	}
 	
@@ -100,7 +102,6 @@ public class Tree : MonoBehaviour {
 			float before_life = _tree_life;
 			GameObject[] before_treeObject = treeObject;
 			Vector3 spawn_position = new Vector3 (this.transform.position.x, this.transform.position.y, this.transform.position.z);
-			Debug.Log("Beofre desro");
 			Destroy (this.gameObject);
 			Quaternion spawn_orientation = Quaternion.identity;
 			GameObject go = Instantiate (treeObject [before_level], spawn_position, spawn_orientation) as GameObject;
@@ -108,6 +109,8 @@ public class Tree : MonoBehaviour {
 			tree.Tree_level = before_level +1 ;
 			tree.Tree_life = before_life ;
 			tree.treeObject = before_treeObject ;
+			GameObject floor = GameObject.FindGameObjectWithTag("floor");
+			floor.GetComponent<SceneManager>().current_tree = go;
 		} else {
 			//TODO end the game
 			Debug.Log("Your die");
@@ -115,7 +118,7 @@ public class Tree : MonoBehaviour {
 
 	}
 	#endregion
-	
+
 	public float Current_maturity
 	{
 		get { return _current_maturity ; }
