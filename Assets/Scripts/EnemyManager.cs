@@ -23,6 +23,7 @@ public class EnemyManager : MonoBehaviour {
 				yield return new WaitForSeconds (1);
 				//yield return 0;
 			}
+
 			//yield return new WaitForSeconds (10);
 			yield return 0;
 		}

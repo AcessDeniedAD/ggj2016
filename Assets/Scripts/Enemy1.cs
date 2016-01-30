@@ -8,7 +8,8 @@ public class Enemy1 : EnnemisMain {
 	// Use this for initialization
 	void Start () {
 		//Init closest tree
-		tree = findClosestTree();
+		target = findClosestTree().transform.position;
+		lifeIndicator = transform.Find("LifeIndicator").gameObject;
 
 		animator =gameObject.GetComponent<Animator> ();
 		audioSource =gameObject.GetComponent<AudioSource> ();
@@ -16,14 +17,23 @@ public class Enemy1 : EnnemisMain {
 
 	public void moveEnemy(){
 		float step = speed * Time.deltaTime;
-		transform.LookAt(tree.transform.position);
-		transform.position = Vector3.MoveTowards(transform.position, tree.transform.position, step);
+		transform.LookAt(target);
+		transform.position = Vector3.MoveTowards(transform.position, target, step);
 	}
 
 
 	// Update is called once per frame
 	void Update () {
-		if (!hasReachTheTree) { moveEnemy (); }
+		//Move object
+		if (!hasReachTheTree && isAlive) { moveEnemy (); }
+
+
+
+		if(lifeIndicator != null) {
+			//Rotate life indicator to face the camera
+			lifeIndicator.transform.LookAt(lifeIndicatorLookTarget.transform.position);
+		}
+
 		timeBeetween2Frames = Time.deltaTime;
 		timer += timeBeetween2Frames;
 		if (timer > 2) 
