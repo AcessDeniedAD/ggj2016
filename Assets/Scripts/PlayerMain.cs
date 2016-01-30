@@ -192,14 +192,6 @@ public class PlayerMain : MonoBehaviour
 	{
 		skill1 = new CallBackMethode (p_callBackExecution);//set le comportement du skill 
 	}
-	public static Bullet CreateBullet()
-	{
-		GameObject newObject = Instantiate(Resources.Load("Prefab/Bullet")) as GameObject;
-		Bullet b = newObject.GetComponent<Bullet>();
-		b.playerId = 1;
-		b.damage = 100;
-		return b;
-	}
 	public void shootBullet()
 	{
 		if(isAlive)
@@ -208,7 +200,9 @@ public class PlayerMain : MonoBehaviour
 			Debug.Log (rateOfFire);
 			if (timerForShoot >= rateOfFire) 
 			{
-				GameObject go = Instantiate (bullet, transform.position, transform.rotation) as GameObject;
+				Bullet b = Instantiate (bullet, transform.position, transform.rotation) as Bullet;
+				b.playerNum = playerNum;
+				b.damage = 100;
 				timerForShoot = 0;
 			}	
 		}
