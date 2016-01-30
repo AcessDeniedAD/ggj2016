@@ -102,4 +102,21 @@ public class EnnemisMain : MonoBehaviour {
 		return closest;
 	}
 
+	void OnTriggerEnter(Collider other){
+		if (other.tag == "bullet") {
+			Bullet bullet = other.GetComponent<Bullet>();
+			takeDamage(bullet.damage);
+			StartCoroutine(DestroyBullet(bullet));
+		}
+	}
+
+	IEnumerator DestroyBullet(Bullet b)
+	{
+		//ici jouer les animations de mort avant la destruction 
+		animator.SetBool ("canDie", true);
+		yield return new WaitForEndOfFrame ();
+		Destroy(b);
+		yield return 0;
+	}
+
 }

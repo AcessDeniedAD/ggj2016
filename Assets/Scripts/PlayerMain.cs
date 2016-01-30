@@ -200,7 +200,9 @@ public class PlayerMain : MonoBehaviour
 			Debug.Log (rateOfFire);
 			if (timerForShoot >= rateOfFire) 
 			{
-				GameObject go = Instantiate (bullet, transform.position, transform.rotation) as GameObject;
+				Bullet b = Instantiate (bullet, transform.position, transform.rotation) as Bullet;
+				b.playerNum = playerNum;
+				b.damage = 100;
 				timerForShoot = 0;
 			}	
 		}

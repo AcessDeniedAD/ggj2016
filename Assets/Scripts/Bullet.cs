@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class Bullet : MonoBehaviour {
-
+	public float playerNum;
+	public float damage;
 	public  float speed;
 	// Use this for initialization
 	void Start () {
