@@ -81,6 +81,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  effect_up: {fileID: 144774, guid: 1efe9ead9a7f4e3469167f484b38ce34, type: 2}
+  total_maturity: 0
 --- !u!136 &13679680
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -109,6 +111,14 @@ Prefab:
       propertyPath: treeObject.Array.data[0]
       value: 
       objectReference: {fileID: 131336, guid: e110f369d5f03c94b8b01fdb380c8149, type: 2}
+    - target: {fileID: 0}
+      propertyPath: effect_up
+      value: 
+      objectReference: {fileID: 144774, guid: 1efe9ead9a7f4e3469167f484b38ce34, type: 2}
+    - target: {fileID: 0}
+      propertyPath: cameraRay
+      value: 
+      objectReference: {fileID: 159928, guid: 9f9edb61a4171bd40ae3c6f28b2704c6, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 194744}
