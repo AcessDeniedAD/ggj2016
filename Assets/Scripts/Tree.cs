@@ -23,8 +23,6 @@ public class Tree : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		GameObject floor = GameObject.FindGameObjectWithTag("floor");
-		Debug.LogWarning(this.gameObject);
-		Debug.LogWarning(floor.GetComponent<SceneManager>().current_tree);
 		floor.GetComponent<SceneManager>().current_tree.Add(this.gameObject);
 		_tree_life = treelife;
 	}
@@ -32,15 +30,7 @@ public class Tree : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// TODO to delete
-		timer += Time.deltaTime;
-		if (timer > 0.5) {
-			timer  = 0;
-			GameObject floor = GameObject.FindGameObjectWithTag("floor");
-			if(this.gameObject == floor.GetComponent<SceneManager>().current_tree[0])
-				up_maturity(3.5f);
-			else
-				up_maturity(5.5f);
-		}
+	
 	}
 
 	void OnTriggerEnter(Collider other) {
@@ -91,7 +81,6 @@ public class Tree : MonoBehaviour {
 			else{
 				Debug.Log("You're fucking tree are full maturity");
 			}
-
 			if (_current_maturity == max_maturity) {
 				up_level_tree();
 

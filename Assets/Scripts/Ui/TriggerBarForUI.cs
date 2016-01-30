@@ -35,6 +35,8 @@ public class TriggerBarForUI : MonoBehaviour {
 			if(!other.gameObject.GetComponent<Letters>().isOkay)
 			{
 				player.GetComponent<PlayerMain>().defeatIncant = true;
+				player.GetComponent<PlayerMain>().canIncant = true;
+				player.GetComponent<PlayerMain>().buttonXSign.SetActive(true);
 			}
 		}
 		

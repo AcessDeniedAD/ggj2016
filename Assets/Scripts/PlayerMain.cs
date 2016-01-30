@@ -23,8 +23,8 @@ public class PlayerMain : MonoBehaviour
 	//[HideInInspector]public 
 	private float timeBeetween2Frames = 0;
 	private float timer;
-	private float timerForShoot=0.9f;
-	private bool canIncant=false;
+	private float timerForShoot=0.5f;
+	[HideInInspector]public bool canIncant=false;
 	private bool isIncant = false;
 
 
@@ -58,7 +58,7 @@ public class PlayerMain : MonoBehaviour
 		var inputDevice = (InputManager.Devices.Count > playerNum) ? InputManager.Devices[playerNum] : null;
 		if (inputDevice == null)
 		{
-			Debug.LogError("Pas de manette detectée");
+			//Debug.LogError("Pas de manette detectée");
 		}
 		else
 		{
@@ -98,12 +98,15 @@ public class PlayerMain : MonoBehaviour
 			StartCoroutine(iconOK());
 			if(LettersGameObj!=null)
 			LettersGameObj.GetComponent<Letters>().goDestroy();
-			if(LettersGameObj.GetComponent<Letters>().lastLetters)
+			if(LettersGameObj.GetComponent<Letters>() != null && LettersGameObj.GetComponent<Letters>().lastLetters)
 			{
 				JaugeInputPlayer1.GetComponent<Animator>().SetBool("canDie",true);
 				isIncant = false;
 				LettersId="none";
 				rythmeScript.DestroyLetters();
+				canIncant = true;
+				buttonXSign.SetActive(true);
+
 			}
 		}
 		if (isIncant && inputDevice.Action2.WasPressed && LettersId=="b") 
@@ -118,11 +121,12 @@ public class PlayerMain : MonoBehaviour
 				isIncant = false;
 				LettersId="none";
 				rythmeScript.DestroyLetters();
+				canIncant = true;
+				buttonXSign.SetActive(true);
 			}
 		}
 		if (isIncant && inputDevice.Action3.WasPressed && LettersId=="x") 
 		{
-
 			StartCoroutine(iconOK());
 			if(LettersGameObj!=null)
 			LettersGameObj.GetComponent<Letters>().goDestroy();
@@ -132,11 +136,12 @@ public class PlayerMain : MonoBehaviour
 				isIncant = false;
 				LettersId="none";
 				rythmeScript.DestroyLetters();
+				canIncant = true;
+				buttonXSign.SetActive(true);
 			}
 		}
 		if (isIncant && inputDevice.Action4.WasPressed && LettersId=="y") 
 		{
-
 			StartCoroutine(iconOK());
 			if(LettersGameObj!=null)
 			LettersGameObj.GetComponent<Letters>().goDestroy();
@@ -146,6 +151,8 @@ public class PlayerMain : MonoBehaviour
 				isIncant = false;
 				LettersId="none";
 				rythmeScript.DestroyLetters();
+				canIncant = true;
+				buttonXSign.SetActive(true);
 			}
 		}
 		//----DEPLACEMENT
@@ -203,7 +210,7 @@ public class PlayerMain : MonoBehaviour
 	}
 	void OnTriggerExit(Collider col)
 	{
-		if (col.tag == "IncantationArea") {
+		if (col.tag == "IncatationArea") {
 			buttonXSign.SetActive(false);
 			canIncant = false;
 		}
