@@ -8,13 +8,13 @@ public class PlayerMain : MonoBehaviour
 	public int playerNum;
 	public AudioClip deathSound;
 	public float speed=5;
+	public GameObject buttonXSign;
 	public GameObject bullet;
 	[HideInInspector]public bool isAlive = true;
 	[HideInInspector]public Animator animator;
 	[HideInInspector]public AudioSource audioSource;
 	private float rateOfFire=0.2f;
 	//[HideInInspector]public 
-
 	private float timeBeetween2Frames = 0;
 	private float timer;
 	private float timerForShoot=0;
@@ -50,7 +50,7 @@ public class PlayerMain : MonoBehaviour
 		timer += timeBeetween2Frames;
 		if (timer > 2) 
 		{
-			takeDamage(50);
+			//takeDamage(50);
 			timer=0;
 		}
 		//-------------------------------------
@@ -98,11 +98,12 @@ public class PlayerMain : MonoBehaviour
 		Destroy(gameObject);
 		yield return 0;
 	}
+	//_________________TRIGGERING_____________________________________
 	void OnTriggerEnter(Collider col)
 	{
 
 		if (col.tag == "IncantationArea") {
-			Debug.Log ("doihfeiughfdiuoghfduykgveyfd,hngin,fdmohtrfminhhniov");
+			buttonXSign.SetActive(true);
 		}
 		else 
 		{
@@ -110,6 +111,14 @@ public class PlayerMain : MonoBehaviour
 			setSkill1 (col.gameObject.GetComponent<ItemMain> ().getSkill); 
 		}
 	}
+	void OnTriggerExit(Collider col)
+	{
+		if (col.tag == "IncantationArea") {
+			buttonXSign.SetActive(false);
+		}
+	}
+	//_____________________________________________________________________
+
 	public void setSkill1(CallBackMethode p_callBackExecution)
 	{
 		skill1 = new CallBackMethode (p_callBackExecution);//set le comportement du skill 
