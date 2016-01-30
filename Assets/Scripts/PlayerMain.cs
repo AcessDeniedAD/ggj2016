@@ -19,11 +19,11 @@ public class PlayerMain : MonoBehaviour
 	[HideInInspector]public AudioSource audioSource;
 	[HideInInspector] public GameObject LettersGameObj;
 	[HideInInspector]public bool defeatIncant;
-	private float rateOfFire=1f;
+	private float rateOfFire=0.3f;
 	//[HideInInspector]public 
 	private float timeBeetween2Frames = 0;
 	private float timer;
-	private float timerForShoot=0;
+	private float timerForShoot=0.9f;
 	private bool canIncant=false;
 	private bool isIncant = false;
 
@@ -45,16 +45,16 @@ public class PlayerMain : MonoBehaviour
 	}
 	void Update()
 	{
-		//Si le joueur rate un incantation
+		//----------------Si le joueur rate un incantation
 		if (defeatIncant) 
 		{
 			defeatIncant=false;
-			Debug.Break();
 			JaugeInputPlayer1.GetComponent<Animator>().SetBool("canDie",true);
 			isIncant = false;
 			LettersId="none";
 			rythmeScript.DestroyLetters();
 		}
+		//------------------------------------------------
 		var inputDevice = (InputManager.Devices.Count > playerNum) ? InputManager.Devices[playerNum] : null;
 		if (inputDevice == null)
 		{
@@ -220,12 +220,11 @@ public class PlayerMain : MonoBehaviour
 		{
 			timerForShoot += Time.deltaTime;
 			Debug.Log (rateOfFire);
-			Debug.Break();
 			if (timerForShoot >= rateOfFire) 
 			{
-				Bullet b = Instantiate (bullet, transform.position, transform.rotation) as Bullet;
-				b.playerNum = playerNum;
-				b.damage = 100;
+				GameObject bulletGO = Instantiate (bullet, transform.position, transform.rotation) as GameObject;
+				bulletGO.GetComponent<Bullet>().playerNum = playerNum;
+				bulletGO.GetComponent<Bullet>().damage = 100;
 				timerForShoot = 0;
 			}	
 		}

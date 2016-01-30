@@ -17,13 +17,11 @@ public class EnemyManager : MonoBehaviour {
 			for(int i = 0; i < 10 ; i++){
 				Vector3 spawn_position = getSpawnPostion();
 				Quaternion spawn_orientation = Quaternion.identity;
-
+			
 				Instantiate(enemy,spawn_position,spawn_orientation);
-
 				yield return new WaitForSeconds (1);
 				//yield return 0;
 			}
-
 			//yield return new WaitForSeconds (10);
 			yield return 0;
 		}

@@ -61,7 +61,6 @@ public class EnnemisMain : MonoBehaviour {
 			lifeIndicator.transform.localScale -= new Vector3(scaleXToRemove, 0, 0);
 			yield return new WaitForEndOfFrame ();
 		}
-
 		yield return 0;
 	}
 
