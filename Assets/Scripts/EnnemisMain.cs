@@ -38,15 +38,36 @@ public class EnnemisMain : MonoBehaviour {
 	public void takeDamage(float damage)
 	{
 		HP -= damage;
+		if (HP < 0) { HP = 0; }
 		
 		//Change size of life indicator
-		lifeIndicator.transform.localScale -= new Vector3((HPInit-HP) / HPInit, 0, 0);
+		if (lifeIndicator != null) {
+			Debug.Log(HP / HPInit);
+			StartCoroutine (reduceLifeIndicator (new Vector3 (HP / HPInit, 0, 0)));
+		}
 
 		if (HP <= 0 && isAlive) 
 		{
 			StartCoroutine(setDestroy());
 		}
 	}
+	
+	IEnumerator reduceLifeIndicator(Vector3 target)
+	{
+		float deltaTimeToEnd = 0.3f;
+		Debug.Log ("localscale=" + lifeIndicator.transform.localScale.x);
+		Debug.Log ("target=" + target.x);
+		while (lifeIndicator.transform.localScale.x > target.x) {
+			float scaleXToRemove = Time.deltaTime * target.x / deltaTimeToEnd;
+			if (scaleXToRemove == 0) { scaleXToRemove = 0.01f; }
+			if (lifeIndicator.transform.localScale.x - scaleXToRemove < 0) { scaleXToRemove = lifeIndicator.transform.localScale.x; }
+			lifeIndicator.transform.localScale -= new Vector3(scaleXToRemove, 0, 0);
+			yield return new WaitForEndOfFrame ();
+		}
+
+		yield return 0;
+	}
+
 	IEnumerator setDestroy()
 	{
 		isAlive = false;
