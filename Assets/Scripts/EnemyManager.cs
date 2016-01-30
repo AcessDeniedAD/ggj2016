@@ -51,7 +51,6 @@ public class EnemyManager : MonoBehaviour {
 				result = new Vector3 (maxX, enemy.transform.position.y, Random.Range (minZ, maxZ));
 			}
 		}
-		Debug.Log("<color=red>Fatal error:</color> default degetSpawnPostion");
 		return result;
 	}
 	

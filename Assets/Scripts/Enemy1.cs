@@ -16,13 +16,14 @@ public class Enemy1 : EnnemisMain {
 
 	public void moveEnemy(){
 		float step = speed * Time.deltaTime;
+		transform.LookAt(tree.transform.position);
 		transform.position = Vector3.MoveTowards(transform.position, tree.transform.position, step);
 	}
 
 
 	// Update is called once per frame
 	void Update () {
-		moveEnemy ();
+		if (!hasReachTheTree) { moveEnemy (); }
 		timeBeetween2Frames = Time.deltaTime;
 		timer += timeBeetween2Frames;
 		if (timer > 2) 
