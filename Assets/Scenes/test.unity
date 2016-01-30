@@ -304,7 +304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62e2d872854fb44429a07f85448b1b2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1845381383}
+  player: {fileID: 0}
 --- !u!1 &591861691
 GameObject:
   m_ObjectHideFlags: 0
@@ -800,7 +800,7 @@ MonoBehaviour:
   playerNum: 0
   deathSound: {fileID: 8300000, guid: 0fc6b7b99b2ab3d42971b8d1dc9398dd, type: 3}
   speed: 5
-  buttonXSign: {fileID: 1980633726}
+  buttonXSign: {fileID: 0}
   bullet: {fileID: 140426, guid: 6b6754a8efb8bfd40aef7247e4175674, type: 2}
   isAlive: 1
   animator: {fileID: 0}
