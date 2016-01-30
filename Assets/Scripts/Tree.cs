@@ -10,7 +10,7 @@ public class Tree : MonoBehaviour {
 	public float up_vitesse;
 	public GameObject[] treeObject;
 	public GameObject effect_up;
-	public float total_maturity;
+	public float total_maturity = 0;
 
 	// Private attributes
 	private float _current_maturity = 0;
