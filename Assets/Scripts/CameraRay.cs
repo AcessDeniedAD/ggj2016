@@ -15,11 +15,18 @@ public class CameraRay : MonoBehaviour {
 
 	}
 	void OnTriggerStay(Collider col)
-	{
+	{	
+		if(rende != null)
 		rende.material.color = new Color(rende.material.color.r,rende.material.color.g,rende.material.color.b,0.5f);
 	}
 	void OnTriggerExit(Collider col)
 	{
+		if(rende != null)
 		rende.material.color = new Color(rende.material.color.r,rende.material.color.g,rende.material.color.b,1f);
+	}
+	public void reSetTree()
+	{
+		tree = GameObject.FindGameObjectWithTag ("tree");
+		rende= tree.GetComponent<Renderer> ();
 	}
 }

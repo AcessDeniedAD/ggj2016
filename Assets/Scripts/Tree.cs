@@ -11,11 +11,13 @@ public class Tree : MonoBehaviour {
 	public GameObject[] treeObject;
 	public GameObject effect_up;
 	public float total_maturity = 0;
+	public GameObject cameraRay;
 
 	// Private attributes
 	private float _current_maturity = 0;
 	private int _tree_level = 1;
 	private float _tree_life;
+
 
 	#endregion
 
@@ -67,17 +69,18 @@ public class Tree : MonoBehaviour {
 	/// <param name="maturity_to_up">Float value to increase maturity tree</param>
 	public void up_maturity(float maturity_to_up){
 		if (_tree_life != 0) {
-			if (max_maturity > _current_maturity && (_current_maturity + maturity_to_up) < max_maturity) {
+			if (max_maturity > _current_maturity && (_current_maturity +  (maturity_to_up*treeObject.Length)) < max_maturity) {
 				total_maturity += maturity_to_up;
 				_current_maturity += (maturity_to_up * treeObject.Length);
 			}
-			else if((_current_maturity + maturity_to_up) > max_maturity && _current_maturity < max_maturity){
+			else if((_current_maturity + (maturity_to_up*treeObject.Length)) > max_maturity && _current_maturity < max_maturity){
 				total_maturity += maturity_to_up;
 				_current_maturity = max_maturity;
 			}
 			else{
 				Debug.Log("You're fucking tree are full maturity");
 			}
+			Debug.Log(_current_maturity);
 			if (total_maturity > max_maturity)
 				total_maturity = max_maturity;
 			if (_current_maturity == max_maturity) {
