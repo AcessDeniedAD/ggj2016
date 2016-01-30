@@ -1,32 +1,32 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &154584
+--- !u!1 &106316
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 224: {fileID: 22422794}
-  - 222: {fileID: 22214422}
-  - 114: {fileID: 11462874}
-  - 114: {fileID: 11404638}
-  - 50: {fileID: 5040112}
-  - 58: {fileID: 5806866}
+  - 224: {fileID: 22479746}
+  - 222: {fileID: 22215480}
+  - 114: {fileID: 11491626}
+  - 114: {fileID: 11432544}
+  - 50: {fileID: 5041014}
+  - 58: {fileID: 5814766}
   m_Layer: 5
-  m_Name: a
-  m_TagString: Letters
+  m_Name: b2
+  m_TagString: Latters
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!50 &5040112
+--- !u!50 &5041014
 Rigidbody2D:
   serializedVersion: 2
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 154584}
+  m_GameObject: {fileID: 106316}
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
@@ -36,12 +36,12 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &5806866
+--- !u!58 &5814766
 CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 154584}
+  m_GameObject: {fileID: 106316}
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -49,12 +49,12 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 40
---- !u!114 &11404638
+--- !u!114 &11432544
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 154584}
+  m_GameObject: {fileID: 106316}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 578928a220162c54cb1c9d62a8d9aa4a, type: 3}
@@ -62,13 +62,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   lastLetters: 0
+  isOkay: 0
   id: 
---- !u!114 &11462874
+--- !u!114 &11491626
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 154584}
+  m_GameObject: {fileID: 106316}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
@@ -76,7 +77,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Sprite: {fileID: 21300000, guid: c0b12a72904f82d4688f17819712d807, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 01ab376a59f61264288d572732239227, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -84,27 +85,27 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!222 &22214422
+--- !u!222 &22215480
 CanvasRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 154584}
---- !u!224 &22422794
+  m_GameObject: {fileID: 106316}
+--- !u!224 &22479746
 RectTransform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 154584}
+  m_GameObject: {fileID: 106316}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5.90171814, y: .574707329, z: 1.52274382}
+  m_LocalScale: {x: 5.04313183, y: .491098642, z: 1.30121422}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: -21.050415, y: 184.489883}
+  m_AnchoredPosition: {x: -21.050415, y: 127.09304}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: .5, y: .5}
 --- !u!1001 &100100000
@@ -113,24 +114,8 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 0}
-      propertyPath: m_Radius
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_IsKinematic
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 0}
-      propertyPath: m_TagString
-      value: Letters
-      objectReference: {fileID: 0}
+    m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 154584}
+  m_RootGameObject: {fileID: 106316}
   m_IsPrefabParent: 1

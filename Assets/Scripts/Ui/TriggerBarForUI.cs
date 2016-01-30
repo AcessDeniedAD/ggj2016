@@ -20,7 +20,7 @@ public class TriggerBarForUI : MonoBehaviour {
 		}
 	}
 	void OnTriggerStay2D(Collider2D other) {
-		if (other.tag == "letters") 
+		if (other.tag == "Letters" || other.tag == "Latters") 
 		{
 			playerMain.LettersId = other.gameObject.GetComponent<Letters>().id;
 			playerMain.LettersGameObj = other.gameObject;
@@ -29,10 +29,13 @@ public class TriggerBarForUI : MonoBehaviour {
 		
 	}
 	void OnTriggerExit2D(Collider2D other) {
-		if (other.tag == "letters") 
+		if (other.tag == "Letters"||other.tag == "Latters") 
 		{
 			isOccuped=false;
-			
+			if(!other.gameObject.GetComponent<Letters>().isOkay)
+			{
+				player.GetComponent<PlayerMain>().defeatIncant = true;
+			}
 		}
 		
 	}

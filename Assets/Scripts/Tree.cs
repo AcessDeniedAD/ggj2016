@@ -72,8 +72,6 @@ public class Tree : MonoBehaviour {
 		}
 
 	}
-
-
 	/// <summary>
 	/// Up the maturity tree value
 	/// </summary>

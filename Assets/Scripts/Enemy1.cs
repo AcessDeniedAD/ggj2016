@@ -40,12 +40,13 @@ public class Enemy1 : EnnemisMain {
 			lifeIndicator.transform.LookAt(lifeIndicatorLookTarget.transform.position);
 		}
 
+		/*
 		timeBeetween2Frames = Time.deltaTime;
 		timer += timeBeetween2Frames;
 		if (timer > 2) 
 		{
 			takeDamage(100);
 			timer=0;
-		}
+		}*/
 	}
 }

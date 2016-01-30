@@ -10,7 +10,6 @@ public class RythmeScript : MonoBehaviour {
 	private int nbrInput=10;
 	// Use this for initialization
 	void Start () {
-		StartCoroutine (setInputPos ());
 
 	}
 	
@@ -18,9 +17,31 @@ public class RythmeScript : MonoBehaviour {
 	void Update () {
 		
 	}
+	public void DestroyLetters()
+	{
+		if (a.tag == "Latters") {
+			GameObject[] gos = GameObject.FindGameObjectsWithTag ("Latters");
+			for (int i = 0; i<gos.Length; i++) {
+				Destroy (gos [i]);
+			}
+		} 
+		else 
+		{
+			GameObject[] gos = GameObject.FindGameObjectsWithTag ("Letters");
+			for (int i = 0; i<gos.Length; i++) {
+				Destroy (gos [i]);
+			}
+		}
+
+		
+	}
+	public void SetInputPos()
+	{
+		StartCoroutine (setInputPos ());
+	}
 	IEnumerator setInputPos()
 	{
-		yield return new WaitForSeconds (0.3f);
+		yield return new WaitForSeconds (1f);
 		for (int i = 0; i<=nbrInput; i++)
 		{
 			int rand =Random.Range(1,5);
