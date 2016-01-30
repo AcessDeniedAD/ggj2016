@@ -64,9 +64,19 @@ public class Tree : MonoBehaviour {
 	#region Public method
 	public void take_dammage(EnnemisMain enemy){
 		_tree_life -= enemy.damage;
-		if (_tree_life == 0) {
-			// TODO Call loose scene 
 
+		GameObject floor = GameObject.FindGameObjectWithTag("floor");
+		bool is_end_game = true;
+		foreach (GameObject tree in  floor.GetComponent<SceneManager>().current_tree)
+		{
+			if(tree.GetComponent<Tree>().Tree_life != 0){
+				is_end_game = false;
+				break;
+			}
+		}
+		if (is_end_game == true){
+			Application.LoadLevel("Menu");
+			Debug.Log ("End game");
 		}
 
 	}
@@ -147,7 +157,8 @@ public class Tree : MonoBehaviour {
 		} else {
 			//TODO end the game
 			bool is_end_game = true;
-			foreach (GameObject tree in treeObject)
+			GameObject floor = GameObject.FindGameObjectWithTag("floor");
+			foreach (GameObject tree in floor.GetComponent<SceneManager>().current_tree)
 			{
 				if(tree.GetComponent<Tree>().total_maturity != 100){
 					is_end_game = false;
