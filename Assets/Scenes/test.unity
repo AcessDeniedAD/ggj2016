@@ -158,6 +158,7 @@ GameObject:
   - 33: {fileID: 426990736}
   - 136: {fileID: 426990735}
   - 23: {fileID: 426990734}
+  - 114: {fileID: 426990738}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Tree
@@ -196,7 +197,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 426990733}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: .5
   m_Height: 2
@@ -216,11 +217,25 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 426990733}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.39060006e-07, y: 0, z: 2.78129988e-07}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3.33311152, y: 5.76898289, z: 3.33311033}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
+--- !u!114 &426990738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 426990733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 002c7fdbdcbea9f44923e7040dbc83b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  treelife: 100
+  max_maturity: 100
+  up_vitesse: 0
 --- !u!1 &534914136
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,6 +495,7 @@ GameObject:
   - 114: {fileID: 897597574}
   - 95: {fileID: 897597579}
   - 82: {fileID: 897597580}
+  - 54: {fileID: 897597581}
   m_Layer: 0
   m_Name: Enemy1
   m_TagString: Enemy
@@ -498,10 +514,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0a680ba0b4974b46bf5b9c1840f3905, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 150
+  HP: 15000
   damage: 0
-  speed: 10
-  tree: {fileID: 0}
+  speed: 1
+  hasReachTheTree: 0
   isAlive: 1
   animator: {fileID: 0}
   audioSource: {fileID: 0}
@@ -540,7 +556,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1.15999997, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &897597577
 MeshFilter:
@@ -647,6 +663,21 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!54 &897597581
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 897597573}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1076084693
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,7 +844,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1197466522}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.70000005, z: 0}
+  m_LocalPosition: {x: 0, y: -1.70000005, z: -.00999999978}
   m_LocalScale: {x: 80.649292, y: 1.57900214, z: 94.1791458}
   m_Children: []
   m_Father: {fileID: 0}
