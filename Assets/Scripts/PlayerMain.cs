@@ -169,7 +169,7 @@ public class PlayerMain : MonoBehaviour
 	void OnTriggerEnter(Collider col)
 	{
 
-		if (col.tag == "IncantationArea") {
+		if (col.tag == "IncatationArea") {
 			buttonXSign.SetActive(true);
 			canIncant = true;
 		}
