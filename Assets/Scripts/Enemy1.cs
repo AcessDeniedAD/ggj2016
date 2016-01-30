@@ -16,6 +16,7 @@ public class Enemy1 : EnnemisMain {
 
 	public void moveEnemy(){
 		float step = speed * Time.deltaTime;
+		transform.LookAt(tree.transform.position);
 		transform.position = Vector3.MoveTowards(transform.position, tree.transform.position, step);
 	}
 

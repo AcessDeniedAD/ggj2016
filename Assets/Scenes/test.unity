@@ -516,7 +516,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: 15000
   damage: 0
-  speed: 1
+  speed: 10
   hasReachTheTree: 0
   isAlive: 1
   animator: {fileID: 0}
