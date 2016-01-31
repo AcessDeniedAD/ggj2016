@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Collections;
 
@@ -9,6 +10,9 @@ public class SceneManager : MonoBehaviour {
 	public static int scorePlayer1 = 0;
 	public static int scorePlayer2 = 0;
 	private static float mana = 0;
+	
+	public Text textScore1;
+	public Text textScore2;
 
 	public static void addMana(int m){
 		if ((m + mana) > 100) {
@@ -45,5 +49,7 @@ public class SceneManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		textScore1.text = scorePlayer1.ToString().PadLeft(4, '0');;
+		textScore2.text = scorePlayer2.ToString().PadLeft(4, '0');;
 	}
 }
