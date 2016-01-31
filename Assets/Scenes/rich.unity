@@ -898,7 +898,7 @@ Prefab:
       objectReference: {fileID: 2100000, guid: daa5da0673f83b14dba0babfb08f8382, type: 2}
     - target: {fileID: 11483304, guid: e110f369d5f03c94b8b01fdb380c8149, type: 2}
       propertyPath: treelife
-      value: 1000
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e110f369d5f03c94b8b01fdb380c8149, type: 2}
