@@ -8,6 +8,9 @@ public class SceneManager : MonoBehaviour {
 	public static bool end_game;
 	public static int scorePlayer1 = 0;
 	public static int scorePlayer2 = 0;
+	public static bool start;
+	private float timerForStart=3;
+	private float t=0;
 	private static float mana = 0;
 
 	public static void addMana(int m){
@@ -39,11 +42,14 @@ public class SceneManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		start = true;
+		end_game = false;
 		Debug.Log ("I'm here");
 		List<GameObject> current_tree = new List<GameObject> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
 	}
 }

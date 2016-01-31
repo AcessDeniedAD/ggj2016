@@ -19,7 +19,7 @@ public class PlayerMain : MonoBehaviour
 	[HideInInspector]public AudioSource audioSource;
 	[HideInInspector] public GameObject LettersGameObj;
 	[HideInInspector]public bool defeatIncant;
-	private float rateOfFire=0.2f;
+	private float rateOfFire=0.3f;
 	//[HideInInspector]public 
 	private float timeBeetween2Frames = 0;
 	private float timer;
@@ -27,6 +27,8 @@ public class PlayerMain : MonoBehaviour
 	[HideInInspector]public GameObject InOnThisTree;
 	[HideInInspector]public bool canIncant=false;
 	private bool isIncant = false;
+	private Transform forAnimate;
+	private Animator forAnimateAnimator;
 
 
 	public delegate void CallBackMethode(Transform playerPos);
@@ -41,6 +43,8 @@ public class PlayerMain : MonoBehaviour
 	}
 	void Start()
 	{
+		forAnimate = transform.FindChild("Chara");
+		forAnimateAnimator = forAnimate.GetComponent<Animator> ();
 		animator =gameObject.GetComponent<Animator> ();
 		audioSource =gameObject.GetComponent<AudioSource> ();
 	}
@@ -169,7 +173,12 @@ public class PlayerMain : MonoBehaviour
 		{
 			gameObject.transform.position += new Vector3 (inputDevice.LeftStickX * Time.deltaTime*speed, 0, inputDevice.LeftStickY * Time.deltaTime*speed );
 			if (Mathf.Abs (inputDevice.LeftStickX) >= 0.19 || Mathf.Abs (inputDevice.LeftStickY) >= 0.19) {
+				forAnimateAnimator.SetBool("isWalking",true);
 				transform.rotation = Quaternion.Euler (new Vector3 (0, Mathf.Atan2 (inputDevice.LeftStickX, inputDevice.LeftStickY) * Mathf.Rad2Deg, 0));
+			}
+			else
+			{
+				forAnimateAnimator.SetBool("isWalking",false);
 			}
 			if (Mathf.Abs (inputDevice.RightStickX) >= 0.65 || Mathf.Abs (inputDevice.RightStickY) >= 0.65) {
 				//timer += Time.deltaTime;
