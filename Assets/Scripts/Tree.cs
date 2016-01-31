@@ -40,7 +40,7 @@ public class Tree : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		if (other.tag == "Enemy") {
 			EnnemisMain enemy = other.GetComponent<EnnemisMain>();
-			take_dammage(enemy);
+			//take_dammage(enemy);
 			enemy.hasReachTheTree = true;
 		}
 		if (other.tag == "bullet") {
@@ -66,8 +66,8 @@ public class Tree : MonoBehaviour {
 		bool is_end_game = true;
 		foreach (GameObject tree in  floor.GetComponent<SceneManager>().current_tree)
 		{
-			if(tree.GetComponent<Tree>().Tree_life != 0){
-				is_end_game = false;
+			if(tree.GetComponent<Tree>().Tree_life == 0){
+				is_end_game = True;
 				break;
 			}
 		}
