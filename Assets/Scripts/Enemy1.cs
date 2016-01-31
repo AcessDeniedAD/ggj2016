@@ -43,8 +43,9 @@ public class Enemy1 : EnnemisMain {
 		/*
 		timeBeetween2Frames = Time.deltaTime;
 		timer += timeBeetween2Frames;
-		if (timer > 2) 
+		if (timer > 1) 
 		{
+			SceneManager.addMana(5);
 			takeDamage(100);
 			timer=0;
 		}*/

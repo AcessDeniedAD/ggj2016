@@ -111,14 +111,21 @@ public class EnnemisMain : MonoBehaviour {
 		return result;
 	}
 
+
+	//Collide with enemy
 	void OnTriggerEnter(Collider other){
 		if (other.tag == "bullet") {
 			GameObject bulletGO = other.gameObject;
 			takeDamage(bulletGO.GetComponent<Bullet>().damage);
-			PlayerMain pm = findPlayerNumber(bulletGO.GetComponent<Bullet>().playerNum);
-			if (pm != null){
-				//pm.score += 1;
+			//PlayerMain pm = findPlayerNumber(bulletGO.GetComponent<Bullet>().playerNum); // depreciated
+			if (bulletGO.GetComponent<Bullet>().playerNum == 0){
+				SceneManager.scorePlayer1++;
 			}
+			else {
+				SceneManager.scorePlayer2++;
+			}
+			SceneManager.addMana(5);
+
 			StartCoroutine(DestroyBullet(bulletGO));
 		}
 	}

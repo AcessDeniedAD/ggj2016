@@ -8,7 +8,34 @@ public class SceneManager : MonoBehaviour {
 	public static bool end_game;
 	public static int scorePlayer1 = 0;
 	public static int scorePlayer2 = 0;
-	public static float mana = 0;
+	private static float mana = 0;
+
+	public static void addMana(int m){
+		if ((m + mana) > 100) {
+			mana = 100;
+		} else {
+			mana += m;
+		}
+	}
+
+	public static float getMana(){
+		return mana;
+	}
+
+	public static bool canUseMana(){
+		if (mana >= 20) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public static void useMana(){
+		if (canUseMana ()) {
+			addMana(-20);
+		}
+	}
+
 
 	// Use this for initialization
 	void Start () {
