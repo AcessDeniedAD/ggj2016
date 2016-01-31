@@ -118,16 +118,19 @@ public class EnnemisMain : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		if (other.tag == "bullet") {
 			GameObject bulletGO = other.gameObject;
-			takeDamage(bulletGO.GetComponent<Bullet>().damage);
 			//PlayerMain pm = findPlayerNumber(bulletGO.GetComponent<Bullet>().playerNum); // depreciated
-			if (bulletGO.GetComponent<Bullet>().playerNum == 0){
-				SceneManager.scorePlayer1++;
-			}
-			else {
-				SceneManager.scorePlayer2++;
-			}
-			SceneManager.addMana(5);
 
+			if(HP - bulletGO.GetComponent<Bullet>().damage <= 0) {
+				if (bulletGO.GetComponent<Bullet>().playerNum == 0){
+					SceneManager.scorePlayer1++;
+				}
+				else {
+					SceneManager.scorePlayer2++;
+				}
+				SceneManager.addMana(5);
+			}
+			
+			takeDamage(bulletGO.GetComponent<Bullet>().damage);
 			StartCoroutine(DestroyBullet(bulletGO));
 		}
 	}
