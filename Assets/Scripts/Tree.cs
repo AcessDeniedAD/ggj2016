@@ -26,11 +26,11 @@ public class Tree : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		_tree_life = treelife;
+		GameObject floor = GameObject.FindGameObjectWithTag("floor");
+		floor.GetComponent<SceneManager>().current_tree.Add(this.gameObject);
 		GameObject.Find ("Player").GetComponent<PlayerMain> ().InOnThisTree = gameObject;
 		GameObject.Find ("Player2").GetComponent<PlayerMain> ().InOnThisTree = gameObject;
 		GameObject.Find ("Jauge1Mat").GetComponent<Turn> ().tree = gameObject;
-		GameObject floor = GameObject.FindGameObjectWithTag("floor");
-		floor.GetComponent<SceneManager>().current_tree.Add(this.gameObject);
 	}
 	
 	// Update is called once per frame
@@ -78,22 +78,27 @@ public class Tree : MonoBehaviour {
 	/// </summary>
 	/// <param name="maturity_to_up">Float value to increase maturity tree</param>
 	public void up_maturity(float maturity_to_up){
-		if (_tree_life != 0) {
+		if (_tree_life >= 0) {
+			Debug.Log ("<<<<<<<<<<<<<<");
+			Debug.Log (maturity_to_up);
+			Debug.Log (_current_maturity);
+			Debug.Log (total_maturity);
+			Debug.Log (max_maturity);
 			if (max_maturity > _current_maturity && (_current_maturity +  (maturity_to_up*treeObject.Length)) < max_maturity) {
 				total_maturity += maturity_to_up;
 				_current_maturity += (maturity_to_up * treeObject.Length);
 			}
-			else if((_current_maturity + (maturity_to_up*treeObject.Length)) > max_maturity && _current_maturity < max_maturity){
+			else if((_current_maturity + (maturity_to_up*treeObject.Length)) >= max_maturity && _current_maturity < max_maturity){
 				total_maturity += maturity_to_up;
 				_current_maturity = max_maturity;
 			}
 			else{
 				Debug.Log("You're fucking tree are full maturity");
 			}
-			Debug.Log(_current_maturity);
 			if (total_maturity > max_maturity)
 				total_maturity = max_maturity;
 			if (_current_maturity == max_maturity) {
+				Debug.Log (">>>>>>>");
 				up_level_tree();
 				_current_maturity = total_maturity % (max_maturity / treeObject.Length);
 			}

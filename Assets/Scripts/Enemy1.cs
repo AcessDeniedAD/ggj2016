@@ -25,8 +25,6 @@ public class Enemy1 : EnnemisMain {
 		transform.LookAt(target);
 		transform.position = Vector3.MoveTowards(transform.position, target, step);
 	}
-
-
 	// Update is called once per frame
 	void Update () {
 		//Move object

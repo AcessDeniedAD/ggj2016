@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5846496d44511a44db2a6a41cf710a3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNum: 1
+  playerNum: 0
   damage: 100
   speed: 25
 --- !u!135 &13584980
@@ -137,7 +137,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: playerNum
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
