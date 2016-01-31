@@ -19,7 +19,7 @@ public class PlayerMain : MonoBehaviour
 	[HideInInspector]public AudioSource audioSource;
 	[HideInInspector] public GameObject LettersGameObj;
 	[HideInInspector]public bool defeatIncant;
-	private float rateOfFire=0.3f;
+	private float rateOfFire=0.19f;
 	//[HideInInspector]public 
 	private float timeBeetween2Frames = 0;
 	private float timer;
@@ -87,9 +87,9 @@ public class PlayerMain : MonoBehaviour
 			if(skill1 != null && isAlive)
 			skill1(transform);
 		}*/
-		if (canIncant && inputDevice.Action3.WasPressed ) 
+		if (canIncant && inputDevice.Action3.WasPressed && SceneManager.canUseMana()) 
 		{
-
+			SceneManager.useMana();
 			buttonXSign.SetActive(false);
 			JaugeInputPlayer1.SetActive(true);
 			JaugeInputPlayer1.GetComponent<Animator>().SetBool("canDie",false);
