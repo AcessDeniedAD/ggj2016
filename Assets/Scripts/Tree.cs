@@ -31,6 +31,7 @@ public class Tree : MonoBehaviour {
 		GameObject.Find ("Player").GetComponent<PlayerMain> ().InOnThisTree = gameObject;
 		GameObject.Find ("Player2").GetComponent<PlayerMain> ().InOnThisTree = gameObject;
 		GameObject.Find ("Jauge1Mat").GetComponent<Turn> ().tree = gameObject;
+		GameObject.Find ("Jauge2Mat").GetComponent<Turn> ().tree = gameObject;
 	}
 	
 	// Update is called once per frame

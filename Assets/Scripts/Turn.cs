@@ -26,7 +26,6 @@ public class Turn : MonoBehaviour
 		if (bar_type == State.life) {
 			OriScale100Pourcent = transform.localScale.x;
 			mfX = transform.position.x + transform.localScale.x / 2.0f;
-			mfY = transform.position.y;
 			mfZ = transform.position.z;
 		}
 	}
@@ -38,13 +37,13 @@ public class Turn : MonoBehaviour
 			//tree.GetComponent<Tree>().total_maturity
 			Vector3 v3Scale = new Vector3 (tree.GetComponent<Tree> ().total_maturity * OriScale100Pourcent / 100, transform.localScale.y, transform.localScale.z);
 			transform.localScale = new Vector3 (v3Scale.x + Time.deltaTime, v3Scale.y, v3Scale.z);
-			transform.position = new Vector3 (mfX + transform.localScale.x / 2.0f, mfY, mfZ);
+			transform.position = new Vector3 (mfX + transform.localScale.x / 2.0f,transform.position.y, mfZ);
 		} 
 		if (bar_type == State.life) {
 			Debug.Log(tree.GetComponent<Tree> ().Tree_life);
 			Vector3 v3Scale = new Vector3 (tree.GetComponent<Tree> ().Tree_life * OriScale100Pourcent / 100, transform.localScale.y, transform.localScale.z);
 			transform.localScale = new Vector3 (v3Scale.x - Time.deltaTime, v3Scale.y, v3Scale.z);
-			transform.position = new Vector3 (mfX - transform.localScale.x / 2.0f, mfY, mfZ);
+			transform.position = new Vector3 (mfX - transform.localScale.x / 2.0f, transform.position.y, mfZ);
 		}
 	}	
 }
