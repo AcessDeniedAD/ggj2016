@@ -60,7 +60,11 @@ public class Tree : MonoBehaviour {
 
 	#region Public method
 	public void take_dammage(EnnemisMain enemy){
-		_tree_life -= enemy.damage;
+		if (enemy.damage > _tree_life) {
+			_tree_life = 0;
+		} else {
+			_tree_life -= enemy.damage;
+		}
 
 
 		if (_tree_life <= 0){
