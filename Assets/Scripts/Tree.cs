@@ -67,7 +67,7 @@ public class Tree : MonoBehaviour {
 		foreach (GameObject tree in  floor.GetComponent<SceneManager>().current_tree)
 		{
 			if(tree.GetComponent<Tree>().Tree_life == 0){
-				is_end_game = True;
+				is_end_game = true;
 				break;
 			}
 		}
