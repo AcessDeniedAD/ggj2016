@@ -19,11 +19,11 @@ public class PlayerMain : MonoBehaviour
 	[HideInInspector]public AudioSource audioSource;
 	[HideInInspector] public GameObject LettersGameObj;
 	[HideInInspector]public bool defeatIncant;
-	private float rateOfFire=0.3f;
+	private float rateOfFire=0.2f;
 	//[HideInInspector]public 
 	private float timeBeetween2Frames = 0;
 	private float timer;
-	private float timerForShoot=0.5f;
+	private float timerForShoot=0.3f;
 	[HideInInspector]public GameObject InOnThisTree;
 	[HideInInspector]public bool canIncant=false;
 	private bool isIncant = false;

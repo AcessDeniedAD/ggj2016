@@ -28,9 +28,6 @@ public class Tree : MonoBehaviour {
 		GameObject.Find ("Player").GetComponent<PlayerMain> ().InOnThisTree = gameObject;
 		GameObject.Find ("Player2").GetComponent<PlayerMain> ().InOnThisTree = gameObject;
 		GameObject.Find ("Jauge1Mat").GetComponent<Turn> ().tree = gameObject;
-		cameraRay = GameObject.Find ("CameraRay").GetComponent<CameraRay> ();
-		cameraRay.tree = gameObject;
-		cameraRay.reSetTree ();
 		GameObject floor = GameObject.FindGameObjectWithTag("floor");
 		floor.GetComponent<SceneManager>().current_tree.Add(this.gameObject);
 		_tree_life = treelife;

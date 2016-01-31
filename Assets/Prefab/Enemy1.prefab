@@ -269,6 +269,7 @@ MonoBehaviour:
   lifeIndicatorLookTarget: {fileID: 175564, guid: a6df64a2da8564a8b9b3b3772c6cae8b,
     type: 2}
   hasReachTheTree: 0
+  skullAnim: {fileID: 172902, guid: d8330ef25f0dfd54f8177c4c6eca1f3d, type: 2}
   isAlive: 1
   animator: {fileID: 0}
   audioSource: {fileID: 0}
@@ -308,6 +309,10 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: skullAnim
+      value: 
+      objectReference: {fileID: 172902, guid: d8330ef25f0dfd54f8177c4c6eca1f3d, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 171142}

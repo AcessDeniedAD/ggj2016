@@ -10,6 +10,7 @@ public class EnnemisMain : MonoBehaviour {
 	protected Vector3 target;
 	protected GameObject lifeIndicator;
 	public bool hasReachTheTree = false;
+	public GameObject skullAnim;
 	[HideInInspector]public bool isAlive = true;
 	[HideInInspector]public Animator animator;
 	[HideInInspector]public AudioSource audioSource;
@@ -70,8 +71,9 @@ public class EnnemisMain : MonoBehaviour {
 		audioSource.PlayOneShot (deathSound);
 		//ici jouer les animations de mort avant la destruction 
 		animator.SetBool ("canDie", true);
-		yield return new WaitForEndOfFrame ();
-		yield return new WaitForSeconds (3);
+
+		yield return new WaitForSeconds (0.5f);
+		GameObject go = Instantiate (skullAnim, transform.position, Quaternion.identity) as GameObject;
 		Destroy(gameObject);
 		yield return 0;
 	}
