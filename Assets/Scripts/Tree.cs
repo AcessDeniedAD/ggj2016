@@ -25,14 +25,12 @@ public class Tree : MonoBehaviour {
 	#region Unity method 
 	// Use this for initialization
 	void Start () {
+		_tree_life = treelife;
 		GameObject.Find ("Player").GetComponent<PlayerMain> ().InOnThisTree = gameObject;
 		GameObject.Find ("Player2").GetComponent<PlayerMain> ().InOnThisTree = gameObject;
 		GameObject.Find ("Jauge1Mat").GetComponent<Turn> ().tree = gameObject;
 		GameObject floor = GameObject.FindGameObjectWithTag("floor");
 		floor.GetComponent<SceneManager>().current_tree.Add(this.gameObject);
-		
-		Debug.Log (treelife);
-		_tree_life = treelife;
 	}
 	
 	// Update is called once per frame
@@ -63,19 +61,9 @@ public class Tree : MonoBehaviour {
 	#region Public method
 	public void take_dammage(EnnemisMain enemy){
 		_tree_life -= enemy.damage;
-		
-		Debug.Log (_tree_life);
 
-		GameObject floor = GameObject.FindGameObjectWithTag("floor");
-		bool is_end_game = false;
-		foreach (GameObject tree in  floor.GetComponent<SceneManager>().current_tree)
-		{
-			if(tree.GetComponent<Tree>().Tree_life <= 0){
-				is_end_game = true;
-				break;
-			}
-		}
-		if (is_end_game == true){
+
+		if (_tree_life <= 0){
 			Application.LoadLevel("Menu");
 			Debug.Log ("End game");
 		}
