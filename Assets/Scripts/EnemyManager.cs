@@ -11,8 +11,8 @@ public class EnemyManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		spawnWait = 2.0f;
-		enemySpeed = 5.0f;
+		spawnWait = 4.0f;
+		enemySpeed = 4.5f;
 		timeElapsed = 0.0f;
 		StartCoroutine (SpawnWaves ());
 	}
@@ -28,41 +28,37 @@ public class EnemyManager : MonoBehaviour {
 			
 			GameObject enemyGO = Instantiate(enemy,spawn_position,spawn_orientation) as GameObject;
 			
-			if (timeElapsed < 10) {
+			if (timeElapsed < 20) {
 				enemySpeedFactor = 1.0f;
 				spawnWaitFactor = 1.0f;
 			}
-			else if (timeElapsed >= 10 && timeElapsed < 20) {
-				enemySpeedFactor = 1.2f;
+			else if (timeElapsed >= 20 && timeElapsed < 40) {
+				enemySpeedFactor = 1.10f;
 				spawnWaitFactor = 0.95f;
 			}
-			else if (timeElapsed >= 20 && timeElapsed < 30) {
+			else if (timeElapsed >= 40 && timeElapsed < 60) {
 				enemySpeedFactor = 1.25f;
-				spawnWaitFactor = 0.95f;
+				spawnWaitFactor = 0.90f;
 			}
-			else if (timeElapsed >= 30 && timeElapsed < 40) {
+			else if (timeElapsed >= 60 && timeElapsed < 80) {
 				enemySpeedFactor = 1.35f;
 				spawnWaitFactor = 0.85f;
 			}
-			else if (timeElapsed >= 40 && timeElapsed < 50) {
-				enemySpeedFactor = 1.40f;
-				spawnWaitFactor = 0.8f;
-			}
-			else if (timeElapsed >= 50 && timeElapsed < 60) {
-				enemySpeedFactor = 1.50f;
-				spawnWaitFactor = 0.7f;
-			}
-			else if (timeElapsed >= 60 && timeElapsed < 80) {
-				enemySpeedFactor = 1.60f;
-				spawnWaitFactor = 0.7f;
-			}
 			else if (timeElapsed >= 80 && timeElapsed < 100) {
-				enemySpeedFactor = 1.65f;
-				spawnWaitFactor = 0.6f;
+				enemySpeedFactor = 1.45f;
+				spawnWaitFactor = 0.75f;
+			}
+			else if (timeElapsed >= 100 && timeElapsed < 130) {
+				enemySpeedFactor = 1.55f;
+				spawnWaitFactor = 0.70f;
+			}
+			else if (timeElapsed >= 130 && timeElapsed < 200) {
+				enemySpeedFactor = 1.60f;
+				spawnWaitFactor = 0.60f;
 			}
 			else {
 				enemySpeedFactor = 1.70f;
-				spawnWaitFactor = 0.55f;
+				spawnWaitFactor = 0.50f;
 			}
 
 			//Speed ranzomization
@@ -85,6 +81,10 @@ public class EnemyManager : MonoBehaviour {
 			}
 			if (Random.Range(0, 5) == 1) {
 				spawnWaitFactor -= 0.30f;
+			}
+			//safe
+			if (spawnWaitFactor < 0) {
+				spawnWaitFactor = 0;
 			}
 			
 			enemyGO.GetComponent<EnnemisMain>().speed = enemySpeed * enemySpeedFactor;
