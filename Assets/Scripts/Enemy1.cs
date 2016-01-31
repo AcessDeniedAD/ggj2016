@@ -2,9 +2,11 @@
 using System.Collections;
 
 public class Enemy1 : EnnemisMain {
+	
+	private float timer = 2.1f;
+	private float timeBetweenAttacks = 2.0f;
+	private float timeAnimationAttack = 1.0f;
 
-	private float timer = 0 ;
-	private float timeBeetween2Frames;
 	// Use this for initialization
 	void Start () {
 		HP = HPInit;
@@ -29,8 +31,14 @@ public class Enemy1 : EnnemisMain {
 	void Update () {
 		//Move object
 		if (!hasReachTheTree && isAlive) { moveEnemy (); }
-
-
+			
+		if (hasReachTheTree && isAlive) { 
+			timer += Time.deltaTime;
+			if (timer > timeBetweenAttacks) {
+				StartCoroutine(attack());
+				timer=0;
+			}
+		}
 
 		if(lifeIndicator != null) {
 			//Show only of hurt/wounded
@@ -41,8 +49,8 @@ public class Enemy1 : EnnemisMain {
 		}
 
 		/*
-		timeBeetween2Frames = Time.deltaTime;
-		timer += timeBeetween2Frames;
+		// Commit suicide
+		timer += Time.deltaTime;
 		if (timer > 1) 
 		{
 			SceneManager.addMana(5);
@@ -50,4 +58,20 @@ public class Enemy1 : EnnemisMain {
 			timer=0;
 		}*/
 	}
+
+	IEnumerator attack()
+	{
+		//ici jouer les animations de mort avant la destruction 
+
+		yield return new WaitForEndOfFrame ();
+		
+		GameObject go = findClosestTree() as GameObject;
+		if (go != null) {
+			Tree tgo = go.GetComponent<Tree>();
+			tgo.take_dammage(this);
+		}
+
+		yield return 0;
+	}
+
 }
