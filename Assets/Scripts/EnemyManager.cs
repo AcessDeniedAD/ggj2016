@@ -18,51 +18,77 @@ public class EnemyManager : MonoBehaviour {
 	}
 
 	IEnumerator SpawnWaves(){
-
+		
+		yield return new WaitForSeconds (3);//Wait before enemies start to pop.
 		while(true){
-			for(int i = 0; i < 10 ; i++){
-				float enemySpeedFactor = 1.0f;
-				float spawnWaitFactor = 1.0f;
-				Vector3 spawn_position = getSpawnPostion();
-				Quaternion spawn_orientation = Quaternion.identity;
-
-				GameObject enemyGO = Instantiate(enemy,spawn_position,spawn_orientation) as GameObject;
-
-				if (timeElapsed < 10) {
-					enemySpeedFactor = 1.0f;
-					spawnWaitFactor = 1.0f;
-				}
-				else if (timeElapsed >= 10 && timeElapsed < 20) {
-					enemySpeedFactor = 1.2f;
-					spawnWaitFactor = 0.95f;
-				}
-				else if (timeElapsed >= 20 && timeElapsed < 30) {
-					enemySpeedFactor = 1.25f;
-					spawnWaitFactor = 0.95f;
-				}
-				else if (timeElapsed >= 30 && timeElapsed < 40) {
-					enemySpeedFactor = 1.35f;
-					spawnWaitFactor = 0.85f;
-				}
-				else if (timeElapsed >= 40 && timeElapsed < 50) {
-					enemySpeedFactor = 1.40f;
-					spawnWaitFactor = 0.8f;
-				}
-				else if (timeElapsed >= 50 && timeElapsed < 60) {
-					enemySpeedFactor = 1.50f;
-					spawnWaitFactor = 0.7f;
-				}
-				else {
-					enemySpeedFactor = 1.60f;
-					spawnWaitFactor = 0.65f;
-				}
-
-				enemyGO.GetComponent<EnnemisMain>().speed = enemySpeed * enemySpeedFactor;
-				yield return new WaitForSeconds (spawnWait * spawnWaitFactor);
-				//yield return 0;
+			float enemySpeedFactor = 1.0f;
+			float spawnWaitFactor = 1.0f;
+			Vector3 spawn_position = getSpawnPostion();
+			Quaternion spawn_orientation = Quaternion.identity;
+			
+			GameObject enemyGO = Instantiate(enemy,spawn_position,spawn_orientation) as GameObject;
+			
+			if (timeElapsed < 10) {
+				enemySpeedFactor = 1.0f;
+				spawnWaitFactor = 1.0f;
 			}
-			//yield return new WaitForSeconds (10);
-			yield return 0;
+			else if (timeElapsed >= 10 && timeElapsed < 20) {
+				enemySpeedFactor = 1.2f;
+				spawnWaitFactor = 0.95f;
+			}
+			else if (timeElapsed >= 20 && timeElapsed < 30) {
+				enemySpeedFactor = 1.25f;
+				spawnWaitFactor = 0.95f;
+			}
+			else if (timeElapsed >= 30 && timeElapsed < 40) {
+				enemySpeedFactor = 1.35f;
+				spawnWaitFactor = 0.85f;
+			}
+			else if (timeElapsed >= 40 && timeElapsed < 50) {
+				enemySpeedFactor = 1.40f;
+				spawnWaitFactor = 0.8f;
+			}
+			else if (timeElapsed >= 50 && timeElapsed < 60) {
+				enemySpeedFactor = 1.50f;
+				spawnWaitFactor = 0.7f;
+			}
+			else if (timeElapsed >= 60 && timeElapsed < 80) {
+				enemySpeedFactor = 1.60f;
+				spawnWaitFactor = 0.7f;
+			}
+			else if (timeElapsed >= 80 && timeElapsed < 100) {
+				enemySpeedFactor = 1.65f;
+				spawnWaitFactor = 0.6f;
+			}
+			else {
+				enemySpeedFactor = 1.70f;
+				spawnWaitFactor = 0.55f;
+			}
+
+			//Speed ranzomization
+			if (Random.Range(0, 3) == 1) {
+				enemySpeedFactor += 0.2f;
+			}
+			if (Random.Range(0, 3) == 1) {
+				enemySpeedFactor += 0.2f;
+			}
+			if (Random.Range(0, 5) == 1) {
+				enemySpeedFactor += 0.4f;
+			}
+
+			//Spawn wait randomisation
+			if (Random.Range(0, 3) == 1) {
+				spawnWaitFactor -= 0.10f;
+			}
+			if (Random.Range(0, 3) == 1) {
+				spawnWaitFactor -= 0.10f;
+			}
+			if (Random.Range(0, 5) == 1) {
+				spawnWaitFactor -= 0.30f;
+			}
+			
+			enemyGO.GetComponent<EnnemisMain>().speed = enemySpeed * enemySpeedFactor;
+			yield return new WaitForSeconds (spawnWait * spawnWaitFactor);
 		}
 
 	}
