@@ -245,7 +245,7 @@ public class PlayerMain : MonoBehaviour
 			Debug.Log (rateOfFire);
 			if (timerForShoot >= rateOfFire) 
 			{
-				GameObject bulletGO = Instantiate (bullet, transform.position, transform.rotation) as GameObject;
+				GameObject bulletGO = Instantiate (bullet, new Vector3( transform.position.x, transform.position.y+2,transform.position.z), transform.rotation) as GameObject;
 				bulletGO.GetComponent<Bullet>().playerNum = playerNum;
 				bulletGO.GetComponent<Bullet>().damage = 100;
 				timerForShoot = 0;
