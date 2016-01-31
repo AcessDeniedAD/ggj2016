@@ -30,6 +30,8 @@ public class Tree : MonoBehaviour {
 		GameObject.Find ("Jauge1Mat").GetComponent<Turn> ().tree = gameObject;
 		GameObject floor = GameObject.FindGameObjectWithTag("floor");
 		floor.GetComponent<SceneManager>().current_tree.Add(this.gameObject);
+		
+		Debug.Log (treelife);
 		_tree_life = treelife;
 	}
 	
@@ -61,12 +63,14 @@ public class Tree : MonoBehaviour {
 	#region Public method
 	public void take_dammage(EnnemisMain enemy){
 		_tree_life -= enemy.damage;
+		
+		Debug.Log (_tree_life);
 
 		GameObject floor = GameObject.FindGameObjectWithTag("floor");
-		bool is_end_game = true;
+		bool is_end_game = false;
 		foreach (GameObject tree in  floor.GetComponent<SceneManager>().current_tree)
 		{
-			if(tree.GetComponent<Tree>().Tree_life == 0){
+			if(tree.GetComponent<Tree>().Tree_life <= 0){
 				is_end_game = true;
 				break;
 			}

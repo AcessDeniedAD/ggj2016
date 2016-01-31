@@ -69,6 +69,7 @@ public class Enemy1 : EnnemisMain {
 		if (go != null) {
 			Tree tgo = go.GetComponent<Tree>();
 			tgo.take_dammage(this);
+			Debug.Log(tgo.Tree_life);
 		}
 
 		yield return 0;
