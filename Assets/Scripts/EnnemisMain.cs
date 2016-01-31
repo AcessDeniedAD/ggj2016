@@ -117,11 +117,11 @@ public class EnnemisMain : MonoBehaviour {
 	//Collide with enemy
 	void OnTriggerEnter(Collider other){
 		if (other.tag == "bullet") {
-			Debug.Break ();
+
 			GameObject bulletGO = other.gameObject;
 			//PlayerMain pm = findPlayerNumber(bulletGO.GetComponent<Bullet>().playerNum); // depreciated
 
-			if(HP - bulletGO.GetComponent<Bullet>().damage <= 0) {
+			if(HP - bulletGO.GetComponent<Bullet>().damage <= 0 && isAlive) {
 				if (bulletGO.GetComponent<Bullet>().playerNum == 0){
 					SceneManager.scorePlayer1++;
 				}
