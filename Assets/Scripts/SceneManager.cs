@@ -10,8 +10,12 @@ public class SceneManager : MonoBehaviour {
 	public static int scorePlayer1 = 0;
 	public static int scorePlayer2 = 0;
 	public static bool start;
+	public GameObject  victory;
+	public static bool isVictory=false;
 	private float timerForStart=3;
 	private float t=0;
+	public Image victoryTxt;
+	public GameObject fireEffects;
 	private static float mana = 0;
 	
 	public Text textScore1;
@@ -48,7 +52,7 @@ public class SceneManager : MonoBehaviour {
 	void Start () {
 		start = true;
 		end_game = false;
-		Debug.Log ("I'm here");
+		isVictory = false;
 		List<GameObject> current_tree = new List<GameObject> ();
 	}
 	
@@ -57,4 +61,17 @@ public class SceneManager : MonoBehaviour {
 		textScore1.text = scorePlayer1.ToString().PadLeft(4, '0');;
 		textScore2.text = scorePlayer2.ToString().PadLeft(4, '0');;
 	}
+	public void startVictoryScene()
+	{
+		StartCoroutine (victoryScreen ());
+	}
+
+	IEnumerator victoryScreen()
+	{
+		victory.gameObject.SetActive (true);
+		fireEffects.SetActive (true);
+		yield return new WaitForSeconds(5);
+		Application.LoadLevel ("Menu");
+	}
+
 }

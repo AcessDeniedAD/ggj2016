@@ -66,7 +66,8 @@ public class Enemy1 : EnnemisMain {
 		castorAttackAnim.SetBool ("attack", true);
 		yield return new WaitForSeconds (0.2f);
 		GameObject go = findClosestTree() as GameObject;
-		if (go != null) {
+
+		if (go != null && !SceneManager.end_game) {
 			Tree tgo = go.GetComponent<Tree>();
 			tgo.take_dammage(this);
 		}

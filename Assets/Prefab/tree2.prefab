@@ -231,6 +231,7 @@ MonoBehaviour:
   - {fileID: 129916, guid: 27255ef0a529288489cdb8cf8e33f97a, type: 2}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   effect_up: {fileID: 144774, guid: 1efe9ead9a7f4e3469167f484b38ce34, type: 2}
   total_maturity: 0
 --- !u!136 &13638462
@@ -253,6 +254,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: treeObject.Array.size
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_IsActive
       value: 1

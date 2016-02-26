@@ -31,7 +31,9 @@ public class Tree : MonoBehaviour {
 		GameObject.Find ("Player").GetComponent<PlayerMain> ().InOnThisTree = gameObject;
 		GameObject.Find ("Player2").GetComponent<PlayerMain> ().InOnThisTree = gameObject;
 		GameObject.Find ("Jauge1Mat").GetComponent<Turn> ().tree = gameObject;
+		Debug.Log (GameObject.Find ("Jauge1Mat").GetComponent<Turn> ().tree);
 		GameObject.Find ("Jauge2Mat").GetComponent<Turn> ().tree = gameObject;
+		GameObject.Find ("IncatationArea").GetComponent<IncantationArea> ().assignedTree = gameObject;
 	}
 	
 	// Update is called once per frame
@@ -52,7 +54,7 @@ public class Tree : MonoBehaviour {
 	IEnumerator DestroyBullet(GameObject b)
 	{
 		//ici jouer les animations de mort avant la destruction
-		Destroy(b);
+		//Destroy(b);
 		//yield return new WaitForEndOfFrame ();
 		yield return 0;
 	}
@@ -69,6 +71,7 @@ public class Tree : MonoBehaviour {
 
 
 		if (_tree_life <= 0){
+
 			Application.LoadLevel("Menu");
 			Debug.Log ("End game");
 		}
@@ -126,13 +129,13 @@ public class Tree : MonoBehaviour {
 
 	#region Private method
 	private void up_level_tree(){
-		if (treeObject.Length != _tree_level) {
+		if (treeObject.Length != _tree_level+1) {
 			int before_level = _tree_level;
 			float before_life = _tree_life;
 			float before_total_maturity = total_maturity;
 			GameObject[] before_treeObject = treeObject;
 			Vector3 spawn_position = new Vector3 (this.transform.position.x, this.transform.position.y, this.transform.position.z);
-			Destroy (this.gameObject);
+
 			Quaternion spawn_orientation = Quaternion.identity;
 			GameObject go = Instantiate (treeObject [before_level], spawn_position, spawn_orientation) as GameObject;
 			Tree tree = go.GetComponent<Tree>();
@@ -152,7 +155,7 @@ public class Tree : MonoBehaviour {
 					goTemp.GetComponent<up_effect>()._launch_effect();
 				}
 
-			}
+			}Destroy (this.gameObject);
 		} else {
 			//TODO end the game
 			bool is_end_game = true;
@@ -166,7 +169,8 @@ public class Tree : MonoBehaviour {
 			}
 			if (is_end_game == true){
 				SceneManager.end_game = true;
-				Debug.Log ("End game");
+				SceneManager.isVictory = true;
+				GameObject.Find("Floor").GetComponent<SceneManager>().startVictoryScene();
 			}
 		}
 

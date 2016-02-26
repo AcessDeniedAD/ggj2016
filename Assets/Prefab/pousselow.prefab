@@ -167,7 +167,8 @@ MonoBehaviour:
   up_vitesse: 0
   treeObject:
   - {fileID: 173126, guid: 934e98c6346b79541939db35b81f65c9, type: 2}
-  - {fileID: 0}
+  - {fileID: 129916}
+  - {fileID: 173746, guid: 3508f851e5ad49846998cde04a84a7e6, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   effect_up: {fileID: 144774, guid: 1efe9ead9a7f4e3469167f484b38ce34, type: 2}
@@ -193,6 +194,10 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 0}
+      propertyPath: treeObject.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -204,6 +209,14 @@ Prefab:
       propertyPath: treeObject.Array.data[0]
       value: 
       objectReference: {fileID: 173126, guid: 934e98c6346b79541939db35b81f65c9, type: 2}
+    - target: {fileID: 0}
+      propertyPath: treeObject.Array.data[1]
+      value: 
+      objectReference: {fileID: 129916}
+    - target: {fileID: 0}
+      propertyPath: treeObject.Array.data[2]
+      value: 
+      objectReference: {fileID: 173746, guid: 3508f851e5ad49846998cde04a84a7e6, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 129916}

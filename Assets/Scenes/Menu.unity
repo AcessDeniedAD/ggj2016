@@ -289,7 +289,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 889099285}
   m_LocalRotation: {x: -.689953446, y: 0, z: 0, w: .723853767}
-  m_LocalPosition: {x: .0260000005, y: -.497000009, z: -10.0679998}
+  m_LocalPosition: {x: .0260000005, y: -.501999974, z: -10.0679998}
   m_LocalScale: {x: -.042498108, y: .122974716, z: -.0191335306}
   m_Children: []
   m_Father: {fileID: 0}
@@ -644,7 +644,7 @@ MonoBehaviour:
   down: {fileID: 1624995563}
   left: {fileID: 0}
   right: {fileID: 0}
-  levelToLoad: Credits
+  levelToLoad: Credits 1
 --- !u!4 &1070990450
 Transform:
   m_ObjectHideFlags: 0

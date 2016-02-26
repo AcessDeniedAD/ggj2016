@@ -29,6 +29,7 @@ public class PlayerMain : MonoBehaviour
 	private bool isIncant = false;
 	private Transform forAnimate;
 	private Animator forAnimateAnimator;
+	public GameObject rainGo;
 
 
 	public delegate void CallBackMethode(Transform playerPos);
@@ -50,6 +51,14 @@ public class PlayerMain : MonoBehaviour
 	}
 	void Update()
 	{
+		if (isIncant) {
+
+			rainGo.GetComponent<ParticleSystem>().enableEmission=true;
+
+		} else 
+		{
+			rainGo.GetComponent<ParticleSystem>().enableEmission = false;
+		}
 		//----------------Si le joueur rate un incantation
 		if (defeatIncant) 
 		{
@@ -100,7 +109,7 @@ public class PlayerMain : MonoBehaviour
 		if ( isIncant && inputDevice.Action1.WasPressed && LettersId=="a" ) 
 		{
 
-			InOnThisTree.GetComponent<Tree>().up_maturity(10);
+			InOnThisTree.GetComponent<Tree>().up_maturity(3);
 			StartCoroutine(iconOK());
 			if(LettersGameObj!=null)
 			LettersGameObj.GetComponent<Letters>().goDestroy();
@@ -118,7 +127,7 @@ public class PlayerMain : MonoBehaviour
 		}
 		if (isIncant && inputDevice.Action2.WasPressed && LettersId=="b") 
 		{
-			InOnThisTree.GetComponent<Tree>().up_maturity(10);
+			InOnThisTree.GetComponent<Tree>().up_maturity(3);
 			StartCoroutine(iconOK());
 			if(LettersGameObj!=null)
 			LettersGameObj.GetComponent<Letters>().goDestroy();
@@ -134,7 +143,7 @@ public class PlayerMain : MonoBehaviour
 		}
 		if (isIncant && inputDevice.Action3.WasPressed && LettersId=="x") 
 		{
-			InOnThisTree.GetComponent<Tree>().up_maturity(10);
+			InOnThisTree.GetComponent<Tree>().up_maturity(3);
 			StartCoroutine(iconOK());
 			if(LettersGameObj!=null)
 			LettersGameObj.GetComponent<Letters>().goDestroy();
@@ -150,7 +159,7 @@ public class PlayerMain : MonoBehaviour
 		}
 		if (isIncant && inputDevice.Action4.WasPressed && LettersId=="y") 
 		{
-			InOnThisTree.GetComponent<Tree>().up_maturity(10);
+			InOnThisTree.GetComponent<Tree>().up_maturity(3);
 			StartCoroutine(iconOK());
 			if(LettersGameObj!=null)
 			LettersGameObj.GetComponent<Letters>().goDestroy();
@@ -162,6 +171,7 @@ public class PlayerMain : MonoBehaviour
 				LettersId="none";
 				rythmeScript.DestroyLetters();
 				canIncant = true;
+				if(SceneManager.canUseMana())
 				buttonXSign.SetActive(true);
 			}
 		}
